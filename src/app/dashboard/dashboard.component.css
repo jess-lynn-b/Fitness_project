@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  line-height: 1.42857143;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stats-box {
+  background-color: rgb(250, 240, 251);
+}
+
+.bottom-header {
+  position:fixed;
+  bottom:0px;
+  background-color:pink;
+  width:100%;
+}
+
+.progress-stats {
+  font-size: large;
+  font-weight: 500;
+  color: brown;
+}
+
+.activity-stats {
+  border: solid #f5dbe7;
+}
+
+.activity-card {
+  font-size: small;
+  text-align: left;
+  color: chocolate;
+
+  border: solid #f5dbe7;
+  background-color: rgb(250, 240, 251);
+  width: auto;
+  height: 100px;
+}
