@@ -1,1 +1,63 @@
-<p>signup works!</p>
+<div class="card">
+  <h4 class="card-header">Register</h4>
+  <div class="card-body">
+    <form #authForm="ngForm" (ngSubmit)="onSubmit()" class="input-group">
+      <div class="form-group">
+        <label for="firstName"> First Name</label>
+        <input
+          type="firstName"
+          name="firstName"
+          class="form-control"
+          required
+          ngModel
+          autocomplete="name"/>
+      </div>
+      <div class="form-group">
+        <label for="lastName"> Last Name</label>
+        <input
+          type="lastName"
+          name="lastName"
+          class="form-control"
+          required
+          ngModel
+          autocomplete="name"/>
+      </div>
+      <div class="form-group">
+        <label for="email"> Email </label>
+        <input
+        type="email"
+        name="email"
+        id="email"
+        class="form-control"
+        email
+        required
+        ngModel
+        autocomplete="email"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          minlength="6"
+          required
+          ngModel
+          autocomplete="off"
+          />
+      </div>
+      <br>
+      <br>
+      <div class="form-group justify-content-between">
+        <button
+        class="btn btn-primary mr-3"
+        type="submit"
+        [disabled]="!authForm.valid">
+        Submit </button>
+     
+        <a routerLink="../login" class="btn btn-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
