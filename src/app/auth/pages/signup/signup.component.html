@@ -1,20 +1,24 @@
 <div class="card">
   <h4 class="card-header">Register</h4>
   <div class="card-body">
-    <form #authForm="ngForm" (ngSubmit)="onSubmit()" class="input-group">
+    <form #authForm="ngForm"
+    (ngSubmit)="onSubmit(authForm)" class="input-group">
       <div class="form-group">
         <label for="firstName"> First Name</label>
         <input
+          id="firstName"
           type="firstName"
           name="firstName"
           class="form-control"
           required
           ngModel
-          autocomplete="name"/>
+          autocomplete="name"
+        />
       </div>
       <div class="form-group">
         <label for="lastName"> Last Name</label>
         <input
+          id="lastName"
           type="lastName"
           name="lastName"
           class="form-control"
@@ -44,18 +48,18 @@
           minlength="6"
           required
           ngModel
-          autocomplete="off"
           />
       </div>
       <br>
       <br>
       <div class="form-group justify-content-between">
+        <br>
         <button
         class="btn btn-primary mr-3"
         type="submit"
         [disabled]="!authForm.valid">
         Submit </button>
-     
+
         <a routerLink="../login" class="btn btn-link">Cancel</a>
       </div>
     </form>
