@@ -4,17 +4,30 @@ import { TrackerComponent } from './tracker/tracker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { FoodLogComponent } from './tracker/food-log/food-log/food-log.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
-    TrackerComponent
+    TrackerComponent,
+    FoodLogComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule.forChild([
+      {
+        path: 'tracker',
+        component: TrackerComponent,
+      },
+      {
+        path: 'food-log',
+        component: FoodLogComponent,
+      },
+    ]),
     NgCircleProgressModule.forRoot({
       "radius": 60,
       "space": -10,
@@ -32,6 +45,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       "showBackground": false,
       "startFromZero": false,
       "lazy": true}),
+
   ],
   exports: [
     TrackerComponent,
@@ -39,7 +53,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    FoodLogComponent
   ]
 })
 export class SharedModule { }
