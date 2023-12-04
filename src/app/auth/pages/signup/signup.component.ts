@@ -1,49 +1,55 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
-import { AlertService } from '../../services/alert.service';
+import { Observable } from 'rxjs';
+import { AuthService, IAuthResData } from '../../auth.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent implements OnInit {
-  form!: FormGroup;
+export class SignupComponent {
+
   loading = false;
-  submitted = false;
+  authObsv!: Observable<IAuthResData>;
+  signupForm: any;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService
-  ) {}
-  ngOnInit() {
-    this.form = this.formBuilder.group({
+    private authService: AuthService,
+  ) {
+
+    this.signupForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  get f() {
-    return this.form.controls;
-  }
 
-  onSubmit() {
-    this.submitted = true;
-    //reset alerts on submit
-    this.alertService.clear();
-    //stop if form is invalid
-    if (this.form.invalid) {
-      return;
+  onSubmit(form: NgForm) {
+    const {firstName, lastName, email, password} = form.value;
+    console.log(form.value);
+    if( !form.valid || !firstName || !lastName || !email || !email) return;
+
+    if (this.signupForm.invalid) {
+      console.log(this.signupForm.errors);
+    } else {
+      this.authObsv = this.authService.signup({
+        firstName,
+        lastName,
+        email,
+        password
+      });
     }
-    this.loading = true;
-        error: (error: string) => {
-          this.alertService.error(error);
-          this.loading = false;
-        }
+    this.authObsv.subscribe({
+      next: (data) => {
+        console.log(data);
+      }
+    })
   };
 }
