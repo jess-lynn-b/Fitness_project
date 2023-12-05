@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TrackerComponent } from './shared/tracker/tracker.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,11 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
   {
-    path: 'tracker', loadChildren: () => import('./shared/shared.module').then((m) => m.SharedModule),
+    path: 'tracker',
+    component: TrackerComponent,
+  },
+  {
+    path: 'food-log', loadChildren: () => import('./shared/shared.module').then((m) => m.SharedModule),
   },
 
 ];
