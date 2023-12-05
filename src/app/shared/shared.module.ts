@@ -24,7 +24,7 @@ import { RouterModule } from '@angular/router';
         component: TrackerComponent,
       },
       {
-        path: 'food-log',
+        path: 'tracker/food-log',
         component: FoodLogComponent,
       },
     ]),
