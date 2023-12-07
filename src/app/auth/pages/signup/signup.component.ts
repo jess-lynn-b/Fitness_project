@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService, IAuthResData } from '../../auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
+import { formGroup } from 'src/app/shared/models/formGroup.model';
 
 @Component({
   selector: 'app-signup',
@@ -10,46 +10,49 @@ import { AuthService, IAuthResData } from '../../auth.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-
-  loading = false;
-  authObsv!: Observable<IAuthResData>;
-  signupForm: any;
+  signupForm;
 
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private authService: AuthService,
+    private routes: Router
   ) {
-
     this.signupForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['',[Validators.required,Validators.maxLength(15)]],
+      email: ['',[Validators.required, Validators.email]],
+      password: ['',[Validators.required,Validators.minLength(6)]],
+      height: ['', [Validators.required]],
+      currWeight: ['', [Validators.required]],
+      goalWeight: ['', [Validators.required]]
     });
   }
+  get firstName(){
+    return this.signupForm.get('firstName');
+  }
+  get lastName(){
+    return this.signupForm.get('lastName');
+  }
+  get email(){
+    return this.signupForm.get('email');
+  }
+  get password(){
+    return this.signupForm.get('password');
+  }
+  get height(){
+    return this.signupForm.get('height');
+  }
+  get currWeight(){
+    return this.signupForm.get('weight');
+  }
+  get goalWeight(){
+    return this.signupForm.get('goalWeight');
+  }
 
-  onSubmit(form: NgForm) {
-    const {firstName, lastName, email, password} = form.value;
-    console.log(form.value);
-    if( !form.valid || !firstName || !lastName || !email || !email) return;
 
-    if (this.signupForm.invalid) {
-      console.log(this.signupForm.errors);
-    } else {
-      this.authObsv = this.authService.signup({
-        firstName,
-        lastName,
-        email,
-        password
-      });
-    }
-    this.authObsv.subscribe({
-      next: (data) => {
-        console.log(data);
-      }
-    })
-  };
+  onSubmit() {
+   console.log(this.signupForm.value);
+  }
 }
+
