@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { EnvironmentInjector, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, catchError, map, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
 import { enviroment } from "src/app/enviroments/enviroment.prod";
 import { User } from "src/app/shared/models/user";
 
@@ -11,80 +11,86 @@ const LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:register?k
 
 export interface IAuthReqData {
   email: string;
-  firstName: string;
-  lastName: string;
   password: string;
   returnSecureToken?: boolean;
-  idToken?: string;
-  refreshToken?: string;
-  expiresIn?: string;
-  localId?: string;
 };
 export interface IAuthResData{
+  kind: string;
   idToken: string;
   email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
   registered?: boolean;
-  username: string;
   password: string | any;
   firstName: string;
   lastName: string;
 }
 
 @Injectable({ providedIn: 'root' })
+
 export class AuthService {
-  currUser = new BehaviorSubject<User | null>(null);
-  private user: Observable<User | null> | undefined;
-  tokenExpTimer: any;
+  currUser = new BehaviorSubject<User>(null!);
+  private tokenExpirationTimer: any;
 
   constructor(
     private router: Router,
     private http: HttpClient,
   ){}
 
-  login(username: string, password: string){}
-  signup(authData: IAuthReqData){
+  login(authData: IAuthReqData){
+    if (!authData.email || !authData.password) return;
+
     const authRes = this.http
-    .post<IAuthResData>(
-      SIGNUP_URL,
-      {
+      .post<IAuthResData> (LOGIN_URL , {
         ...authData,
         returnSecureToken: true,
       })
-    .pipe(
-        tap((res) => {
-        const { firstName, lastName, email, password} = res;
-        this.handleAuth(firstName,  lastName, email, password);
-      }))
+      .pipe(
+        catchError(this.handleError),
+        tap(resData => {
+          this.handleAuth(
+            resData.email,
+            resData.password,
+            resData.idToken,
+            +resData.expiresIn);
+        })
+      );
+      return authRes;
+  }
 
-     return authRes;
+  signup(authData: IAuthReqData){
+    if (!authData.email || !authData.password) return;
+
+    const authRes = this.http
+      .post<IAuthResData>
+      (SIGNUP_URL, {
+        ...authData,
+        returnSecureToken: true,
+      })
+      .pipe(
+        catchError(this.handleError),
+        tap(resData => {
+          this.handleAuth(
+            resData.email,
+            resData.localId,
+            resData.idToken,
+            +resData.expiresIn);
+        })
+      );
+      return authRes;
   }
   logout(){
-    this.currUser.next(null);
-    this.router.navigate(['/auth']);
-    localStorage.removeItem('userData');
-    if(this.tokenExpTimer) {
-      clearTimeout(this.tokenExpTimer);
-    }
-    this.tokenExpTimer = null;
-  }
-  autoLogOut(expDuration: number) {
-    this.tokenExpTimer = setTimeout(() => {
-      this.logout();
-    }, expDuration);
   }
   private handleAuth(
     email: string,
     userId: string,
     token: string,
-    expiresIn: number) {
-      const expDate = new Date (
-        new Date().getTime()
+    expiresIn: number
+    ) {
+    const expDate = new Date (
+      new Date().getTime()
         +expiresIn * 1000);
-     this.autoLogOut (expiresIn * 1000);
-     localStorage.setItem('userData', JSON.stringify(User));
     }
     private handleError (errorRes: HttpErrorResponse) {
       let errorMsg = 'An unknown error occured!';
@@ -96,5 +102,6 @@ export class AuthService {
             errorMsg = 'This email or password is not correct!';
         }
         return throwError(() => new Error (errorMsg));
-    }
+        }
 }
+

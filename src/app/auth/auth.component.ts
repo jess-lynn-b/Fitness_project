@@ -10,4 +10,5 @@ export class AuthComponent {
   constructor(
     private router: Router,
   ){}
+ 
 }
