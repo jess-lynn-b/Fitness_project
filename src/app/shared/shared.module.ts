@@ -4,11 +4,13 @@ import { TrackerComponent } from './tracker/tracker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ActivityTrackerComponent } from './tracker/activity-tracker/activity-tracker.component';
 
 
 @NgModule({
   declarations: [
-    TrackerComponent
+    TrackerComponent,
+    ActivityTrackerComponent
   ],
   imports: [
     CommonModule,
