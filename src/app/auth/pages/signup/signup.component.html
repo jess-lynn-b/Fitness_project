@@ -1,61 +1,75 @@
 <div class="card">
   <h4 class="card-header">Register</h4>
   <div class="card-body">
-    <form #authForm="ngForm" (ngSubmit)="onSubmit()" class="input-group">
-      <div class="form-group">
-        <label for="firstName"> First Name</label>
-        <input
-          type="firstName"
-          name="firstName"
-          class="form-control"
-          required
-          ngModel
-          autocomplete="name"/>
-      </div>
-      <div class="form-group">
-        <label for="lastName"> Last Name</label>
-        <input
-          type="lastName"
-          name="lastName"
-          class="form-control"
-          required
-          ngModel
-          autocomplete="name"/>
-      </div>
-      <div class="form-group">
-        <label for="email"> Email </label>
-        <input
-        type="email"
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="onSubmit()"
+      class="input-group">
+      <label for="firstName"> First Name</label>
+      <input
+        id="firstName"
+        type="text"
+        name="firstName"
+        formControlName="firstName"
+        required
+        autocomplete="name"/>
+      <label for="lastName"> Last Name</label>
+      <input
+        id="lastName"
+        type="text"
+        name="lastName"
+        required
+        autocomplete="name"
+        formControlName="lastName"/>
+      <label for="email"> Email: </label>
+      <input
+        type="text"
         name="email"
         id="email"
-        class="form-control"
         email
         required
-        ngModel
-        autocomplete="email"/>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="form-control"
-          minlength="6"
-          required
-          ngModel
-          autocomplete="off"
-          />
-      </div>
-      <br>
-      <br>
-      <div class="form-group justify-content-between">
-        <button
-        class="btn btn-primary mr-3"
-        type="submit"
-        [disabled]="!authForm.valid">
-        Submit </button>
-     
+        autocomplete="email"
+        formControlName="email"
+      />
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        minlength="6"
+        required
+        formControlName="password"
+      />
+      <label for="height"> Height</label>
+      <input
+        id="height"
+        type="text"
+        name="height"
+        required
+        formControlName="height"
+      />
+      <label for="currWeight">Current Weight</label>
+      <input
+        id="currWeight"
+        type="text"
+        name="currWeight"
+        required
+        formControlName="currWeight"
+      />
+      <label for="goalWeight"> Goal Weight</label>
+      <input
+        id="goalWeight"
+        type="text"
+        name="goalWeight"
+        required
+        formControlName="goalWeight"
+      />
+      <br />
+      <br />
+      <div class="form-groupjustify-content-between">
+        <br />
+        <button class="btn btn-primary mr-3" type="submit">Submit</button>
+
         <a routerLink="../login" class="btn btn-link">Cancel</a>
       </div>
     </form>

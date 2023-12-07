@@ -5,18 +5,33 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ActivityTrackerComponent } from './tracker/activity-tracker/activity-tracker.component';
+import { RouterModule } from '@angular/router';
+import { FoodDetailComponent } from './tracker/food-log/food-detail/food-detail.component';
+import { FoodListComponent } from './tracker/food-log/food-list/food-list.component';
+import { FoodLogComponent } from './tracker/food-log/food-log/food-log.component';
+import { FoodStartComponent } from './tracker/food-log/food-start/food-start.component';
+import { FoodService } from './tracker/food-log/food-log/food.service';
+import { IngredientService } from './tracker/food-log/ingredient.service';
+import { FoodLogRoutingModule } from './tracker/food-log/food-log/food-log-routing.module';
+
 
 
 @NgModule({
   declarations: [
     TrackerComponent,
-    ActivityTrackerComponent
+    ActivityTrackerComponent,
+    FoodLogComponent,
+    FoodListComponent,
+    FoodDetailComponent,
+    FoodStartComponent
+
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
     NgCircleProgressModule.forRoot({
       "radius": 60,
       "space": -10,
@@ -34,6 +49,7 @@ import { ActivityTrackerComponent } from './tracker/activity-tracker/activity-tr
       "showBackground": false,
       "startFromZero": false,
       "lazy": true}),
+      FoodLogRoutingModule
   ],
   exports: [
     TrackerComponent,
@@ -41,7 +57,8 @@ import { ActivityTrackerComponent } from './tracker/activity-tracker/activity-tr
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgCircleProgressModule
-  ]
+    NgCircleProgressModule,
+  ],
+  providers: [FoodService, IngredientService]
 })
 export class SharedModule { }

@@ -1,49 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
-import { AlertService } from '../../services/alert.service';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
+import { formGroup } from 'src/app/shared/models/formGroup.model';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent implements OnInit {
-  form!: FormGroup;
-  loading = false;
-  submitted = false;
+export class SignupComponent {
+  signupForm;
+
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private alertService: AlertService
-  ) {}
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+    private authService: AuthService,
+    private routes: Router
+  ) {
+    this.signupForm = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['',[Validators.required,Validators.maxLength(15)]],
+      email: ['',[Validators.required, Validators.email]],
+      password: ['',[Validators.required,Validators.minLength(6)]],
+      height: ['', [Validators.required]],
+      currWeight: ['', [Validators.required]],
+      goalWeight: ['', [Validators.required]]
     });
   }
-  get f() {
-    return this.form.controls;
+  get firstName(){
+    return this.signupForm.get('firstName');
+  }
+  get lastName(){
+    return this.signupForm.get('lastName');
+  }
+  get email(){
+    return this.signupForm.get('email');
+  }
+  get password(){
+    return this.signupForm.get('password');
+  }
+  get height(){
+    return this.signupForm.get('height');
+  }
+  get currWeight(){
+    return this.signupForm.get('weight');
+  }
+  get goalWeight(){
+    return this.signupForm.get('goalWeight');
   }
 
+
   onSubmit() {
-    this.submitted = true;
-    //reset alerts on submit
-    this.alertService.clear();
-    //stop if form is invalid
-    if (this.form.invalid) {
-      return;
-    }
-    this.loading = true;
-        error: (error: string) => {
-          this.alertService.error(error);
-          this.loading = false;
-        }
-  };
+   console.log(this.signupForm.value);
+  }
 }
+
