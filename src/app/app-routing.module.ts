@@ -19,9 +19,9 @@ const routes: Routes = [
     component: TrackerComponent,
   },
   {
-    path: 'food-log', loadChildren: () => import('./shared/shared.module').then((m) => m.SharedModule),
+    path: 'food-log',
+    loadChildren: () => import('./shared/shared.module').then((m) => m.SharedModule),
   },
-
 ];
 
 @NgModule({
