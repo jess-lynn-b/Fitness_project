@@ -11,12 +11,14 @@ const LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:register?k
 
 export interface IAuthReqData {
   email: string;
+  firstName: string;
+  lastName: string;
   password: string;
   returnSecureToken?: boolean;
-  idToken: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
+  idToken?: string;
+  refreshToken?: string;
+  expiresIn?: string;
+  localId?: string;
 };
 export interface IAuthResData{
   idToken: string;
@@ -26,7 +28,7 @@ export interface IAuthResData{
   localId: string;
   registered?: boolean;
   username: string;
-  password: string;
+  password: string | any;
   firstName: string;
   lastName: string;
 }
@@ -42,45 +44,22 @@ export class AuthService {
     private http: HttpClient,
   ){}
 
-  login(username: string, password: string){
-    return this.http
-      .post<IAuthReqData>(
-        LOGIN_URL,
-        {
-          username: username,
-          password: password,
-          returnSecureToken: true
-        }
-      )
-      .pipe(
-        catchError(this.handleError),
-        tap(resData => {
-          this.handleAuth(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
-          );
-        })
-      );
-    }
-  signup(user: User){
-    return this.http
+  login(username: string, password: string){}
+  signup(authData: IAuthReqData){
+    const authRes = this.http
     .post<IAuthResData>(
       SIGNUP_URL,
-      {}
-    )
-    .pipe(
-      catchError(this.
-      handleError),
-        tap(resData => {
-        this.handleAuth(
-          resData.email,
-          resData.localId,
-          resData.idToken,
-          +resData.expiresIn);
+      {
+        ...authData,
+        returnSecureToken: true,
       })
-    );
+    .pipe(
+        tap((res) => {
+        const { firstName, lastName, email, password} = res;
+        this.handleAuth(firstName,  lastName, email, password);
+      }))
+
+     return authRes;
   }
   logout(){
     this.currUser.next(null);
