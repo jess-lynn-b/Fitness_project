@@ -14,14 +14,14 @@ const routes: Routes = [
   },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
-  {
-    path: 'tracker',
-    component: TrackerComponent,
-  },
+
+  { path: 'data-tracker', loadChildren: () => import('./data-tracker/data-tracker.module').then(m => m.DataTrackerModule) },
+
   {
     path: 'food-log',
     loadChildren: () => import('./shared/shared.module').then((m) => m.SharedModule),
   },
+
 ];
 
 @NgModule({

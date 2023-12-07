@@ -4,6 +4,7 @@ import { TrackerComponent } from './tracker/tracker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ActivityTrackerComponent } from './tracker/activity-tracker/activity-tracker.component';
 import { RouterModule } from '@angular/router';
 import { FoodDetailComponent } from './tracker/food-log/food-detail/food-detail.component';
 import { FoodListComponent } from './tracker/food-log/food-list/food-list.component';
@@ -14,25 +15,23 @@ import { IngredientService } from './tracker/food-log/ingredient.service';
 import { FoodLogRoutingModule } from './tracker/food-log/food-log/food-log-routing.module';
 
 
+
 @NgModule({
   declarations: [
     TrackerComponent,
+    ActivityTrackerComponent,
     FoodLogComponent,
     FoodListComponent,
     FoodDetailComponent,
     FoodStartComponent
+
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forChild([
-      {
-        path: 'tracker',
-        component: TrackerComponent,
-      },
-    ]),
+    RouterModule,
     NgCircleProgressModule.forRoot({
       "radius": 60,
       "space": -10,
@@ -59,7 +58,6 @@ import { FoodLogRoutingModule } from './tracker/food-log/food-log/food-log-routi
     ReactiveFormsModule,
     HttpClientModule,
     NgCircleProgressModule,
-
   ],
   providers: [FoodService, IngredientService]
 })
