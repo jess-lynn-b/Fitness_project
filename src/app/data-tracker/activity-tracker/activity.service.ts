@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Exercise } from './activity-tracker/exercise.model';
+import { Exercise } from '../../shared/models/exercise.model';
 
 
 @Injectable({

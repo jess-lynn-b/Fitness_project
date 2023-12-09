@@ -13,7 +13,7 @@ export class TrackerComponent {
   estimatedTime: number = 0;
 
   calculateTime() {
-    
+
     const weightToLose = this.weight - this.targetWeight;
     const averageWeightLossPerWeek = 0.5; // Adjust as needed
     this.estimatedTime = weightToLose / averageWeightLossPerWeek;
