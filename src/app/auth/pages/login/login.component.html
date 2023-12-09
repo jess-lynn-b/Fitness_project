@@ -1,0 +1,34 @@
+<div class="card">
+  <h4
+  class = "card-header"> Login </h4>
+  <div class="card-body">
+    <form
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    class="input-group">
+    <label
+    for="email">Email:</label>
+    <input
+    id="email"
+    type="text"
+    name="email"
+    email
+    required
+    autocomplete="email"
+    formControlName="email"/>
+    <label
+    for="password">Password:</label>
+    <input
+    type="password"
+    name="password"
+    id="password"
+    minlength="6"
+    required
+    formControlName="password"/>
+    <div class="form-group justify-content-between">
+      <br>
+      <button class="btn btn-primary mr-3" type="submit">Submit</button>
+    </div>
+  </form>
+  </div>
+</div>
