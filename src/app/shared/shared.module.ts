@@ -8,14 +8,10 @@ import { ActivityTrackerComponent } from './tracker/activity-tracker/activity-tr
 import { RouterModule } from '@angular/router';
 
 
-
-
-
 @NgModule({
   declarations: [
     TrackerComponent,
     ActivityTrackerComponent,
-
 
   ],
   imports: [
