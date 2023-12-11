@@ -1,58 +1,82 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
+import { AuthService, IAuthResData } from '../../auth.service';
 import { formGroup } from 'src/app/shared/models/formGroup.model';
+import { Observable, Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent {
-  signupForm;
-
+export class SignupComponent implements OnInit {
+  [x: string]: any;
+  signupForm: any;
+  authObsv: Observable<IAuthResData> | any;
+  isSignupMode = true;
+  errorMsg: string | null = null;
+  subscription!: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private routes: Router
-  ) {
-    this.signupForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['',[Validators.required,Validators.maxLength(15)]],
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required,Validators.minLength(6)]],
-      height: ['', [Validators.required]],
-      currWeight: ['', [Validators.required]],
-      goalWeight: ['', [Validators.required]]
+    private router: Router
+  ) {}
+  ngOnInit() {
+    this.signupForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      height: new FormControl('', [Validators.required]),
+      currWeight: new FormControl('', [Validators.required]),
+      goalWeight: new FormControl('', [Validators.required]),
     });
   }
-  get firstName(){
+  get firstName() {
     return this.signupForm.get('firstName');
   }
-  get lastName(){
+  get lastName() {
     return this.signupForm.get('lastName');
   }
-  get email(){
+  get email() {
     return this.signupForm.get('email');
   }
-  get password(){
+  get password() {
     return this.signupForm.get('password');
   }
-  get height(){
+  get height() {
     return this.signupForm.get('height');
   }
-  get currWeight(){
+  get currWeight() {
     return this.signupForm.get('weight');
   }
-  get goalWeight(){
+  get goalWeight() {
     return this.signupForm.get('goalWeight');
   }
 
+  onSubmit(form: NgForm) {
+    const signupForm = form.value;
+    const { email, password } = form.value;
+    console.log(this.signupForm.value);
+    if (!form.valid || !email || !password) return;
 
-  onSubmit() {
-   console.log(this.signupForm.value);
+  }
+  onClear() {
+    this.signupForm.reset();
   }
 }
+
 

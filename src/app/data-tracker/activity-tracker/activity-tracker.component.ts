@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivityService } from '../activity.service';
-import { Exercise } from './exercise.model';
+import { ActivityService } from './activity.service';
+import { Exercise } from '../../shared/models/exercise.model';
 
 
 @Component({

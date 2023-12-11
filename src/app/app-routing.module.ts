@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TrackerComponent } from './shared/tracker/tracker.component';
+import { TrackerComponent } from './data-tracker/tracker/tracker.component';
 
 
 const routes: Routes = [

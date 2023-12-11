@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TrackerComponent } from './tracker/tracker.component';
+import { TrackerComponent } from '../data-tracker/tracker/tracker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { ActivityTrackerComponent } from './tracker/activity-tracker/activity-tracker.component';
+import { ActivityTrackerComponent } from '../data-tracker/activity-tracker/activity-tracker.component';
 import { RouterModule } from '@angular/router';
 
 
