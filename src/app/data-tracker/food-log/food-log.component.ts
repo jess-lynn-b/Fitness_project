@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
 })
 
 export class FoodLogComponent {
+
+  constructor(
+    private router: Router) { }
 
 }
