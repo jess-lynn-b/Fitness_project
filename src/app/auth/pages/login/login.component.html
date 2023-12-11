@@ -4,8 +4,7 @@
   <div class="card-body">
     <form
     [formGroup]="loginForm"
-    (ngSubmit)="onSubmit()"
-    class="input-group">
+    (ngSubmit)="onSubmit(loginForm)">
     <label
     for="email">Email:</label>
     <input
@@ -27,7 +26,13 @@
     formControlName="password"/>
     <div class="form-group justify-content-between">
       <br>
-      <button class="btn btn-primary mr-3" type="submit">Submit</button>
+      <button class="btn btn-primary mr-3" type="submit"
+      [disabled]="!loginForm.valid"
+      >Submit</button>
+      <button
+      class="btn btn-primary"
+      type="button"
+      (click)="onClear()">Clear</button>
     </div>
     <p class="alert alert-danger mt-3"
     *ngIf="errorMsg" > {{ errorMsg}} </p>
