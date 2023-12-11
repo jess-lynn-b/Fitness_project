@@ -11,10 +11,8 @@ import { FoodService } from './food.service';
 })
 
 export class FoodLogComponent implements OnInit {
-  foods: Food[] = [];
 
   constructor(
-    private foodService: FoodService,
     private router: Router) { }
 
   ngOnInit(): void {

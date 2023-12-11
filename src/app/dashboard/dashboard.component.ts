@@ -10,8 +10,5 @@ export class DashboardComponent {
 
   constructor() {}
 
-  ngOnInit() {
-  }
-
   sampleUserimg = 'https://images.pexels.com/photos/18554689/pexels-photo-18554689/free-photo-of-a-street-at-night-photographed-in-long-exposure.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load';
 }
