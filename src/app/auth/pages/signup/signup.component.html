@@ -1,9 +1,9 @@
 <div class="card">
   <h4 class="card-header">Register</h4>
-  <div class="card-body">
+  <div *ngIf="signupForm">
     <form
       [formGroup]="signupForm"
-      (ngSubmit)="onSubmit()"
+      (ngSubmit)="onSubmit(signupForm)"
       class="input-group">
       <label for="firstName"> First Name</label>
       <input
@@ -68,8 +68,13 @@
       <br />
       <div class="form-groupjustify-content-between">
         <br />
-        <button class="btn btn-primary mr-3" type="submit">Submit</button>
-
+        <button class="btn btn-primary mr-3" type="submit"
+        [disabled]="!signupForm.valid"
+        >Submit</button>
+        <button
+        class="btn btn-primary"
+        type="button"
+        (click)="onClear()">Clear</button>
         <a routerLink="../login" class="btn btn-link">Cancel</a>
       </div>
     </form>
