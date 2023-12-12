@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Food } from '../food.model';
+import { FoodService } from '../food.service';
 
 @Component({
   selector: 'app-food-list',
@@ -7,4 +9,18 @@ import { Component } from '@angular/core';
 })
 export class FoodListComponent {
 
+  title = '';
+  calories = '';
+  notes = '';
+
+  constructor(
+    private foodService: FoodService) {}
+
+  onCreateFood() {
+    const food: Food = {
+      name: this.title,
+      calories: 0,
+      notes: this.notes
+    };
+  }
 }

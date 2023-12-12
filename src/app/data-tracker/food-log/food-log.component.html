@@ -8,7 +8,7 @@
     <h2>All Meals</h2>
   </div>
 </div>
-  <div class="row">
+  <div class="row" style="border: solid lightgrey 0.5px;">
     <div style="display: flex; justify-content: space-evenly;" class="col-md-12 col-sm-12">
       <a>
         <img style="width: 25px; cursor: pointer;" src="./assets/icons/angle-left.svg" alt="left-angle">
@@ -37,7 +37,8 @@
         <button
         type="button"
         class="btn btn-gray" style="font-weight: 500;
-      color: chocolate;">
+      color: chocolate;"
+        (click)="onAddFood()">
         Add Food
       </button>
       </div>
@@ -123,4 +124,3 @@
         </p>
       </div>
     </div>
-
