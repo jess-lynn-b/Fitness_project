@@ -8,7 +8,7 @@
     <h2>All Meals</h2>
   </div>
 </div>
-  <div class="row">
+  <div class="row" style="border: solid lightgrey 0.5px;">
     <div style="display: flex; justify-content: space-evenly;" class="col-md-12 col-sm-12">
       <a>
         <img style="width: 25px; cursor: pointer;" src="./assets/icons/angle-left.svg" alt="left-angle">
@@ -26,45 +26,89 @@
       <div class="col-md-12 col-sm-12">
         <div style="display: flex;
         margin-left: 10px;" class="breakfast-display">
-          <img src="./assets/icons/sunrise.svg" alt="sunrise-icon">
-          <p style="margin-left: 10px">Breakfast</p>
+          <p>
+            <img src="./assets/icons/sunrise.svg" alt="sunrise-icon"> Breakfast
+          </p>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 col-sm-12">
-        <div style="display: flex;
-        margin-left: 10px;" class="breakfast-display">
-          <img src="./assets/icons/sun.svg" alt="sun-icon">
-          <p style="margin-left: 10px">Lunch</p>
-        </div>
+        <button
+        type="button"
+        class="btn btn-gray" style="font-weight: 500;
+      color: chocolate;"
+        (click)="onAddFood()">
+        Add Food
+      </button>
       </div>
     </div>
-    <div class="row">
+    <div
+      class="row"
+      style="border: solid lightgrey 0.5px;">
       <div class="col-md-12 col-sm-12">
         <div style="display: flex;
-        margin-left: 10px;" class="breakfast-display">
-          <img src="./assets/icons/moon.svg" alt="night-icon">
-          <p style="margin-left: 10px">Dinner</p>
+        margin-left: 10px;" class="lunch-display">
+          <p>
+            <img src="./assets/icons/sun.svg" alt="sun-icon">
+            Lunch
+          </p>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div>
+      <button
+        type="button"
+        class="btn btn-gray" style="font-weight: 500;
+      color: chocolate;">
+        Add Food
+      </button>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
       <div class="col-md-12 col-sm-12">
         <div style="display: flex;
-        margin-left: 10px;" class="breakfast-display">
-          <img src="./assets/icons/bread.svg" alt="bread-icon">
-          <p style="margin-left: 10px">Snacks</p>
+        margin-left: 10px;" class="dinner-display">
+          <p>
+            <img src="./assets/icons/moon.svg" alt="night-icon">
+            Dinner
+          </p>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div>
+      <button
+        type="button"
+        class="btn btn-gray" style="font-weight: 500;
+      color: chocolate;">
+        Add Food
+      </button>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
+      <div class="col-md-12 col-sm-12">
+        <div style="display: flex;
+        margin-left: 10px;" class="snacks-display">
+          <p>
+            <img src="./assets/icons/bread.svg" alt="bread-icon">
+            Snacks
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn btn-gray" style="font-weight: 500;
+      color: chocolate;">
+        Add Food
+      </button>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
       <div class="col-md-12 col-sm-12">
         <p>Day Calories</p>
         <p>Calories#</p>
       </div>
     </div>
-    <div class="row">
+    <div class="row" style="border: solid lightgrey 0.5px;">
       <div class="col-md-12 col-sm-12">
         <p>
           <img src="./assets/icons/edit.svg" alt="pencil-icon">
@@ -72,7 +116,7 @@
         </p>
       </div>
     </div>
-    <div class="row">
+    <div class="row" style="border: solid lightgrey 0.5px;">
       <div class="col-md-12 col-sm-12">
         <p>
           Complete Food Logging for Day
@@ -80,4 +124,3 @@
         </p>
       </div>
     </div>
-
