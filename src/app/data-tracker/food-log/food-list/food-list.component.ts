@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodService } from '../food.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-food-list',
   templateUrl: './food-list.component.html',
-  styleUrls: ['./food-list.component.css'],
-  providers: [FoodService],
+  styleUrls: ['./food-list.component.css']
 })
+
 export class FoodListComponent implements OnInit {
 
   title: string = '';
@@ -39,7 +39,7 @@ export class FoodListComponent implements OnInit {
       category: this.category
     });
 
-    // this.router.navigate(['/data-tracker/food-log']);
+    this.router.navigate(['/data-tracker/food-log']);
   }
 
   onCancel() {

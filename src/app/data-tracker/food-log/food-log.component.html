@@ -58,6 +58,11 @@
             Lunch
           </p>
         </div>
+        <ul>
+          <li *ngFor="let food of getFoodByCategory('lunch')">
+            {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+          </li>
+        </ul>
       </div>
     </div>
     <div>
@@ -77,6 +82,11 @@
             Dinner
           </p>
         </div>
+        <ul>
+          <li *ngFor="let food of getFoodByCategory('dinner')">
+            {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+          </li>
+        </ul>
       </div>
     </div>
     <div>
@@ -96,6 +106,11 @@
             Snacks
           </p>
         </div>
+        <ul>
+          <li *ngFor="let food of getFoodByCategory('snacks')">
+            {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+          </li>
+        </ul>
       </div>
     </div>
     <div>
