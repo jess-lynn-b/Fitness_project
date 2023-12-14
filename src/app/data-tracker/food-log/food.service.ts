@@ -4,27 +4,32 @@ import { Food } from './food.model';
 import { Subject } from "rxjs";
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FoodService {
   FoodChanged = new Subject<Food[]>();
 
-  private foods: Food[] = [
-    new Food(
-      'Carne Asada Tacos',
-      300,
-      "Delicious, did not feel full after eating but am satiated"
-    )
-  ];
+  private foods: any[] = [];
+  // private foods: Food[] = [
+  //   new Food(
+  //     'Carne Asada Tacos',
+  //     300,
+  //     "Delicious, did not feel full after eating but am satiated"
+  //   )
+  // ];
+
+  constructor() {}
 
   getFoods() {
     return this.foods.slice();
   }
 
-  getFood(index: number) {
-    return this.foods[index];
+  getFoodsByCategory(category: string) {
+    return this.foods.filter(food => food.category === category).slice();
   }
 
-  addFood(food: Food) {
+  addFood(food: any) {
     this.foods.push(food);
     this.FoodChanged.next(this.foods.slice());
   }

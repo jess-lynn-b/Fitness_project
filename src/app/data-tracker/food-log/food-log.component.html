@@ -30,15 +30,19 @@
             <img src="./assets/icons/sunrise.svg" alt="sunrise-icon"> Breakfast
           </p>
         </div>
+        <ul>
+          <li *ngFor="let food of getFoodByCategory('breakfast')">
+            {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <button
         type="button"
-        class="btn btn-gray" style="font-weight: 500;
-      color: chocolate;"
-        (click)="onAddFood()">
+        class="btn btn-gray addBtn" 
+        (click)="onAddFood('breakfast')">
         Add Food
       </button>
       </div>
@@ -59,8 +63,9 @@
     <div>
       <button
         type="button"
-        class="btn btn-gray" style="font-weight: 500;
-      color: chocolate;">
+        class="btn btn-gray addBtn" style="font-weight: 500;
+      color: chocolate;"
+      (click)="onAddFood('lunch')">
         Add Food
       </button>
     </div>
@@ -78,8 +83,9 @@
     <div>
       <button
         type="button"
-        class="btn btn-gray" style="font-weight: 500;
-      color: chocolate;">
+        class="btn btn-gray addBtn" style="font-weight: 500;
+      color: chocolate;"
+      (click)="onAddFood('dinner')">
         Add Food
       </button>
     </div>
@@ -97,8 +103,9 @@
     <div>
       <button
         type="button"
-        class="btn btn-gray" style="font-weight: 500;
-      color: chocolate;">
+        class="btn btn-gray addBtn" style="font-weight: 500;
+      color: chocolate;"
+      (click)="onAddFood('snacks')">
         Add Food
       </button>
     </div>
@@ -125,4 +132,4 @@
       </div>
     </div>
 
-<app-food-list></app-food-list>
+<router-outlet></router-outlet>

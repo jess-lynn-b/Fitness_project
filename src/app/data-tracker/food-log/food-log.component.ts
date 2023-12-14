@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FoodListComponent } from './food-list/food-list.component';
+import { FoodService } from './food.service';
 
 @Component({
   selector: 'app-food-log',
@@ -11,13 +11,18 @@ import { FoodListComponent } from './food-list/food-list.component';
 export class FoodLogComponent implements OnInit {
 
   constructor(
+    private foodService: FoodService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
-  onAddFood() {
-    this.router.navigate(['food-list'], { relativeTo: this.route });
+  onAddFood(category: string) {
+    this.router.navigate(['add-log', category ], { relativeTo: this.route });
+  }
+
+  getFoodByCategory(category: string) {
+    return this.foodService.getFoodsByCategory(category);
   }
 }

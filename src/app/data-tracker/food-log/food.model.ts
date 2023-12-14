@@ -1,7 +1,9 @@
 export class Food {
   constructor(
-    public name: string,
+    public title: string,
     public calories: number,
-    public notes: string
+    public notes: string,
+    public date: Date,
+    public category: string
   ) {}
 }

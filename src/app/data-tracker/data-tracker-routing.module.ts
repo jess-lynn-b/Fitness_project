@@ -15,7 +15,7 @@ const routes: Routes = [
         component: FoodLogComponent,
         children: [
           {
-            path: 'food-list',
+            path: 'add-log/:category',
             component: FoodListComponent
           },
         ],

@@ -1,11 +1,12 @@
 <div class="row">
   <div class="col-md-12 col-sm-12">
-    <form (ngSubmit)="onCreateFood()">
+    <form #foodForm="ngForm" (ngSubmit)="onCreateFood()">
       <input
         [(ngModel)]="title"
         type="text"
         name="title"
         placeholder="Title">
+      <label for="calories">Calories: </label>
       <input
         [(ngModel)]="calories"
         type="number"
@@ -13,13 +14,15 @@
         placeholder="Calories">
       <div class="form-group">
         <label
-          for="exampleFormControlTextarea1">
+          for="notes">
           Notes:
         </label>
         <textarea
           class="form-control"
+          [(ngModel)]="notes"
           id="notes"
-          rows="5"></textarea>
+          name="notes"
+          rows="4"></textarea>
       </div>
       <br>
       <button
@@ -30,6 +33,7 @@
       <button
         type="button"
         class="btn btn-dark"
+        (click)="onCancel()"
         >Cancel
       </button>
     </form>
