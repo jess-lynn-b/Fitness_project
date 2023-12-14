@@ -5,7 +5,8 @@ import { FoodService } from '../food.service';
 @Component({
   selector: 'app-food-list',
   templateUrl: './food-list.component.html',
-  styleUrls: ['./food-list.component.css']
+  styleUrls: ['./food-list.component.css'],
+  providers: [FoodService],
 })
 export class FoodListComponent {
 
