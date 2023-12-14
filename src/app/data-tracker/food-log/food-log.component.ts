@@ -10,6 +10,7 @@ import { Food } from './food.model';
 })
 
 export class FoodLogComponent implements OnInit {
+  foodLogs: Food[] = [];
 
   constructor(
     private foodService: FoodService,
@@ -18,6 +19,7 @@ export class FoodLogComponent implements OnInit {
 
   ngOnInit(): void {
     this.foodService.FoodChanged.subscribe((foodLogs: Food[]) => {
+      this.foodLogs = foodLogs;
       console.log(foodLogs);
     })
   }
@@ -27,6 +29,6 @@ export class FoodLogComponent implements OnInit {
   }
 
   getFoodByCategory(category: string) {
-    return this.foodService.getFoodsByCategory(category);
+    return this.foodLogs.filter(food => food.category === category)
   }
 }
