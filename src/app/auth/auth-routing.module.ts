@@ -12,14 +12,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
     ],
-
-    // {
-    //  path: '',
-    //component: AuthComponent,
-    //  children: [
-    //   { path: 'signup', loadChildren: () => import ('./pages/signup/signup.module').then (m => m.SignupModule)
   },
-  // ]
+
 ];
 
 @NgModule({
