@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12" style="display: flex; justify-content: space-evenly;">
+    <a>
+      <img
+        style="width: 25px; cursor: pointer;"
+        src="./assets/icons/angle-left.svg" alt="left-angle">
+    </a>
+    <h2>All Meals</h2>
+  </div>
+</div>
+  <div class="row" style="border: solid lightgrey 0.5px;">
+    <div style="display: flex; justify-content: space-evenly;" class="col-md-12 col-sm-12">
+      <a>
+        <img style="width: 25px; cursor: pointer;" src="./assets/icons/angle-left.svg" alt="left-angle">
+      </a>
+      <a>
+        <img src="./assets/icons/calender.svg" alt="calender">
+      </a>
+      <p>Todays Date</p>
+      <a>
+        <img style="width: 25px; cursor: pointer;" src="./assets/icons/angle-right.svg" alt="calender">
+      </a>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div style="display: flex;
+        margin-left: 10px;" class="breakfast-display">
+          <p>
+            <img src="./assets/icons/sunrise.svg" alt="sunrise-icon"> Breakfast
+          </p>
+        </div>
+        <ul>
+          <li *ngFor="let food of getFoodByCategory('breakfast')">
+            {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <button
+        type="button"
+        class="btn btn-gray addBtn"
+        (click)="onAddFood('breakfast')">
+        Add Food
+      </button>
+      </div>
+    </div>
+    <div
+      class="row"
+      style="border: solid lightgrey 0.5px;">
+      <div class="col-md-12 col-sm-12">
+        <div style="display: flex;
+        margin-left: 10px;" class="lunch-display">
+          <p>
+            <img src="./assets/icons/sun.svg" alt="sun-icon">
+            Lunch
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn btn-gray addBtn"
+      (click)="onAddFood('lunch')">
+        Add Food
+      </button>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
+      <div class="col-md-12 col-sm-12">
+        <div style="display: flex;
+        margin-left: 10px;" class="dinner-display">
+          <p>
+            <img src="./assets/icons/moon.svg" alt="night-icon">
+            Dinner
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn btn-gray addBtn"
+      (click)="onAddFood('dinner')">
+        Add Food
+      </button>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
+      <div class="col-md-12 col-sm-12">
+        <div style="display: flex;
+        margin-left: 10px;" class="snacks-display">
+          <p>
+            <img src="./assets/icons/bread.svg" alt="bread-icon">
+            Snacks
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn btn-gray addBtn"
+      (click)="onAddFood('snacks')">
+        Add Food
+      </button>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
+      <div class="col-md-12 col-sm-12">
+        <p>Day Calories</p>
+        <p>Calories#</p>
+      </div>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
+      <div class="col-md-12 col-sm-12">
+        <p>
+          <img src="./assets/icons/edit.svg" alt="pencil-icon">
+          Complete Food Logging for Day
+        </p>
+      </div>
+    </div>
+    <div class="row" style="border: solid lightgrey 0.5px;">
+      <div class="col-md-12 col-sm-12">
+        <p>
+          Complete Food Logging for Day
+          <img style="width: 25px; cursor: pointer;" src="./assets/icons/angle-small-down.svg" alt="down-arrow-icon">
+        </p>
+      </div>
+    </div>
+
+<router-outlet></router-outlet>

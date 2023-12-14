@@ -1,1 +1,41 @@
-<p>food-list works!</p>
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <form #foodForm="ngForm" (ngSubmit)="onCreateFood()">
+      <input
+        [(ngModel)]="title"
+        type="text"
+        name="title"
+        placeholder="Title">
+      <label for="calories">Calories: </label>
+      <input
+        [(ngModel)]="calories"
+        type="number"
+        name="calories"
+        placeholder="Calories">
+      <div class="form-group">
+        <label
+          for="notes">
+          Notes:
+        </label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="notes"
+          id="notes"
+          name="notes"
+          rows="4"></textarea>
+      </div>
+      <br>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        >Add Food
+      </button>
+      <button
+        type="button"
+        class="btn btn-dark"
+        (click)="onCancel()"
+        >Cancel
+      </button>
+    </form>
+  </div>
+</div>

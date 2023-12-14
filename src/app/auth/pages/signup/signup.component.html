@@ -1,76 +1,91 @@
-<div class="card">
-  <h4 class="card-header">Register</h4>
-  <div class="card-body">
-    <form
-      [formGroup]="signupForm"
-      (ngSubmit)="onSubmit()"
-      class="input-group">
-      <label for="firstName"> First Name</label>
-      <input
-        id="firstName"
-        type="text"
-        name="firstName"
-        formControlName="firstName"
-        required
-        autocomplete="name"/>
-      <label for="lastName"> Last Name</label>
-      <input
-        id="lastName"
-        type="text"
-        name="lastName"
-        required
-        autocomplete="name"
-        formControlName="lastName"/>
-      <label for="email"> Email: </label>
-      <input
-        type="text"
-        name="email"
-        id="email"
-        email
-        required
-        autocomplete="email"
-        formControlName="email"
-      />
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        minlength="6"
-        required
-        formControlName="password"
-      />
-      <label for="height"> Height</label>
-      <input
-        id="height"
-        type="text"
-        name="height"
-        required
-        formControlName="height"
-      />
-      <label for="currWeight">Current Weight</label>
-      <input
-        id="currWeight"
-        type="text"
-        name="currWeight"
-        required
-        formControlName="currWeight"
-      />
-      <label for="goalWeight"> Goal Weight</label>
-      <input
-        id="goalWeight"
-        type="text"
-        name="goalWeight"
-        required
-        formControlName="goalWeight"
-      />
-      <br />
-      <br />
-      <div class="form-groupjustify-content-between">
-        <br />
-        <button class="btn btn-primary mr-3" type="submit">Submit</button>
+<div class="container">
+  <h2>Register</h2>
+  <hr />
+  <div class="justify-content-center align-items-center">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
+      <div class="form-group">
+        <label>
+          Email:
+          <input
+            [class.is-invalid]="
+              email.invalid && (email.touched || hasSubmitted)
+            "
+            id="email"
+            name="email"
+            formControlName="email"
+            type="text"
+            class="form-control"
+            autocomplete="email"
+            required
+            placeholder="Please enter E-mail"
+        /></label>
 
-        <a routerLink="../login" class="btn btn-link">Cancel</a>
+        <div *ngIf="email.invalid && (email.touched || hasSubmitted)">
+          <small *ngIf="email.errors?.required" class="text-danger"
+            >Email is required!</small
+          >
+          <small *ngIf="email.errors?.pattern" class="text-danger">
+            Make sure Email is correct</small
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Password:
+          <input
+            [class.is-invailid]="
+              password.invalid && (password.touched || hasSubmitted)
+            "
+            formControlName="password"
+            name="password"
+            id="password"
+            type="password"
+            class="form-control"
+            placeholder="Create a Password"
+            id="password"
+            autocomplete="off"
+            required
+        /></label>
+
+        <div *ngIf="password.invailid && (password.touched || hasSubmitted)">
+          <label *ngIf="password.errors?.required" class="text-danger"
+            >Password is required</label
+          >
+          <label *ngIf="password.errors?.minlength" class="text-danger"
+            >Password should be minimum of 6 characters</label
+          >
+        </div>
+      </div>
+      <div class="d-flex justify-content-around">
+        <button
+          class="btn btn-primary float-right m-2"
+          type="submit"
+          routerLinkActive="active"
+          (click)="onSubmit(signupForm)"
+        >
+          Submit
+        </button>
+        <div *ngIf="isLoading">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="#f00"
+              stroke-width="10"
+            />
+          </svg>
+        </div>
+        <br />
+        <button class="btn btn-secondary m-2" type="button" (click)="onClear()">
+          Clear
+        </button>
       </div>
     </form>
   </div>

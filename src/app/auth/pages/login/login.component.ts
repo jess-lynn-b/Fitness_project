@@ -3,65 +3,56 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  NgForm,
   Validators,
 } from '@angular/forms';
-import { AuthService, IAuthResData } from '../../auth.service';
+import { AuthService, AuthResData } from '../../auth.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
-  authObsv: Observable<IAuthResData> | any;
-  loginForm;
+export class LoginComponent implements OnInit {
+  authObsv: Observable<AuthResData> | any;
   isLoginMode = true;
   errorMsg: string | null = null;
+  subscription!: Subscription;
+  loginForm: any;
+  hasSubmitted!: boolean;
+
+  get email(){ return this.loginForm.get('email');}
+  get password(){ return this.loginForm.get('password');}
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+    this.loginForm = this.formBuilder.group ({
+      email : ['',[Validators.required]],
+      password : ['',[Validators.required, Validators.minLength(6)]]
     });
   }
-  get email() {
-    return this.loginForm.get('email');
-  }
-  get password() {
-    return this.loginForm.get('password');
-  }
-  onSubmit() {
-    console.log(this.loginForm.value);
-    const { email, password } = this.loginForm.value;
-    if (!this.loginForm.valid || !email || !password) return;
 
-    if (this.isLoginMode) {
-      this.authObsv = this.authService.login({
-        email,
-        password,
-      });
-    } else {
-      this.authObsv = this.authService.signup({
-        email,
-        password,
+  ngOnInit(): void {}
+
+  onSubmit(form: NgForm) {
+    this.hasSubmitted = true;
+    const loginForm = form.value;
+    const { email, password } = form.value;
+    if (!form.valid || !email || !password) return;
+    console.log(loginForm);
+    if (this.isLoginMode){
+      this.authObsv = this.authService.loginWithEmailPassword ({
+        email, password,
+        returnSecureToken: false
       });
     }
-    this.authObsv.subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.router.navigate(['Dashboard']);
-      },
-
-      error: (res: HttpErrorResponse) => {
-        console.log(res);
-        this.errorMsg = res?.error?.error?.message || 'Something went wrong!';
-      },
-    });
+  }
+  onClear() {
+    this.loginForm.reset();
   }
 }

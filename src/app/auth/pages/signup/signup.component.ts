@@ -1,58 +1,71 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth.service';
-import { formGroup } from 'src/app/shared/models/formGroup.model';
+import { AuthService, AuthResData } from '../../auth.service';
+import { Observable, Subscription } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent {
-  signupForm;
+export class SignupComponent implements OnInit {
+  isAuthenticated = false;
+  hasSubmitted!: boolean;
+  signupForm: FormGroup | any;
+  authObsv: Observable<AuthResData> | any;
+  isSignupMode = true;
+  errorMsg: string | null = null;
+  isLoading = false;
 
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private routes: Router
-  ) {
-    this.signupForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['',[Validators.required,Validators.maxLength(15)]],
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required,Validators.minLength(6)]],
-      height: ['', [Validators.required]],
-      currWeight: ['', [Validators.required]],
-      goalWeight: ['', [Validators.required]]
-    });
-  }
-  get firstName(){
-    return this.signupForm.get('firstName');
-  }
-  get lastName(){
-    return this.signupForm.get('lastName');
-  }
-  get email(){
+  get email() {
     return this.signupForm.get('email');
   }
-  get password(){
+  get password() {
     return this.signupForm.get('password');
   }
-  get height(){
-    return this.signupForm.get('height');
-  }
-  get currWeight(){
-    return this.signupForm.get('weight');
-  }
-  get goalWeight(){
-    return this.signupForm.get('goalWeight');
-  }
 
+  private userSub!: Subscription;
 
-  onSubmit() {
-   console.log(this.signupForm.value);
+  constructor(
+    private afAuth: AngularFireAuth,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+  ngOnInit() {
+    this.signupForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+    this.userSub = this.authService.currUser.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      console.log(!user);
+    });
+  }
+  onSubmit(form: NgForm) {
+    this.isLoading = true;
+    const email = document.getElementById('email') as HTMLInputElement;
+    const password = document.getElementById('password') as HTMLInputElement;
+
+    this.afAuth.createUserWithEmailAndPassword(email.value, password.value)
+    .then (() => {
+      this.isLoading = false;
+      email.value = '';
+      password.value = '';
+    })
+    .catch(error => {
+      this.isLoading = false;
+      alert(error.message);
+    });
+  }
+  onClear(){
+    this.signupForm.reset();
   }
 }
-

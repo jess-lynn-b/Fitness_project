@@ -16,11 +16,7 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
 
   { path: 'data-tracker', loadChildren: () => import('./data-tracker/data-tracker.module').then(m => m.DataTrackerModule) },
-
-  {
-    path: 'food-log',
-    loadChildren: () => import('./shared/shared.module').then((m) => m.SharedModule),
-  },
+  { path: '', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) }
 
 ];
 
