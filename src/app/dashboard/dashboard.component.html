@@ -14,7 +14,7 @@
         <div class="row stats-box">
           <div class="col-8">
             <div align="center" style="margin-top: 10%;">
-            <circle-progress [percent]="70" [subtitle]="'Calories'" [space]="-10" [radius]="100" [outerStrokeWidth]="10" [innerStrokeWidth]="10" outerStrokeColor="#f37c7c" innerStrokeColor="#e7e8ea" [animation]="true" [animationDuration]="1000">1800 Kcal</circle-progress>
+            <circle-progress [percent]="calculateProgress()" [subtitle]="'Calories'" [space]="-10" [radius]="100" [outerStrokeWidth]="10" [innerStrokeWidth]="10" outerStrokeColor="#f37c7c" innerStrokeColor="#e7e8ea" [animation]="true" [animationDuration]="1000">1800 Kcal</circle-progress>
             </div>
             <!--stats under graph with progress bars-->
             <div class="progress-stats">
@@ -67,33 +67,5 @@
         </div>
       </div>
     </div>
-    <!--sticky footer-->
-      <div>
-        <footer class="bottom-header">
-          <div
-            style="background-color: #de9191;
-            display: flex;
-            justify-content: space-evenly;
-            height: 50px;">
-            <a style="display: grid; font-size: smaller; cursor: pointer;">
-              <img style="height: 30px;" src="assets/icons/home-icon.svg" alt="home-icon">
-              Home
-            </a>
-            <a style="display: grid; font-size: smaller; cursor: pointer;">
-              <img style="height: 30px;
-              margin-left: 10px;
-              margin-top: 2px;
-              height: 30px;" src="assets/icons/add.svg" alt="add-icon">
-              Log Food
-            </a>
-            <a style="display: grid; font-size: smaller; cursor: pointer;">
-              <img style="height: 30px;" src="assets/icons/profile-icon.svg" alt="profile-icon">
-              Profile
-            </a>
-            <a style="display: grid; font-size: smaller; cursor: pointer;">
-              <img style="height: 30px;" src="assets/icons/logout-icon.svg" alt="logout-icon">
-              Logout
-            </a>
-          </div>
-        </footer>
-      </div>
+
+<app-footer></app-footer>

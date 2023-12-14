@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ActivityTrackerComponent } from '../data-tracker/activity-tracker/activity-tracker.component';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     TrackerComponent,
     ActivityTrackerComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -46,6 +48,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     HttpClientModule,
     NgCircleProgressModule,
+    FooterComponent
   ],
   providers: []
 })
