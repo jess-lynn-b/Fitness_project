@@ -1,0 +1,12 @@
+button{
+  color: black;
+  background: transparent;
+  border: 2px solid magenta;
+}
+button:hover {
+  background: transparent;
+  color: aliceblue;
+}
+.background{
+  color:
+}

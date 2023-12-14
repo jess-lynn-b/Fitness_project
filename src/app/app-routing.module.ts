@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
 
-  { path: 'data-tracker', loadChildren: () => import('./data-tracker/data-tracker.module').then(m => m.DataTrackerModule) }
+  { path: 'data-tracker', loadChildren: () => import('./data-tracker/data-tracker.module').then(m => m.DataTrackerModule) },
+  { path: '', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) }
 
 ];
 
