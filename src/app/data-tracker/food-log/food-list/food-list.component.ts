@@ -39,7 +39,7 @@ export class FoodListComponent implements OnInit {
       category: this.category
     });
 
-    this.router.navigate(['/data-tracker/food-log']);
+    // this.router.navigate(['/data-tracker/food-log']);
   }
 
   onCancel() {

@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 
 import { Food } from './food.model';
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
-  FoodChanged = new Subject<Food[]>();
+  FoodChanged = new BehaviorSubject<Food[]>([]);
 
   private foods: any[] = [];
   // private foods: Food[] = [
@@ -30,6 +30,7 @@ export class FoodService {
   }
 
   addFood(food: any) {
+    console.log(food);
     this.foods.push(food);
     this.FoodChanged.next(this.foods.slice());
   }

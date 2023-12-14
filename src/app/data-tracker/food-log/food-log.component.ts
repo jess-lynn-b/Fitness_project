@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from './food.service';
+import { Food } from './food.model';
 
 @Component({
   selector: 'app-food-log',
@@ -16,6 +17,9 @@ export class FoodLogComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.foodService.FoodChanged.subscribe((foodLogs: Food[]) => {
+      console.log(foodLogs);
+    })
   }
 
   onAddFood(category: string) {
