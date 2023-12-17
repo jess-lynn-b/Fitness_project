@@ -46,26 +46,44 @@
             formControlName="password"
         /></label>
         <div *ngIf="password.invalid && (password.touched || hasSubmitted)">
-          <small *ngIf="password.errors?.required" class="text-danger"
-            >Password is required</small
-          >
-          <small *ngIf="password.errors?.minlength" class="text-danger">
-            Password should be minimum 6 characters</small
-          >
+          <label *ngIf="password.errors?.required" class="text-danger"
+            >Password is required</label>
+          <label *ngIf="password.errors?.minlength" class="text-danger">
+            Password should be minimum 6 characters</label>
         </div>
       </div>
-      <br />
+      <br>
+      <div class="d-flex justify-content-around">
       <button
         class="btn btn-primary float-right m-2"
         type="submit"
+        routerLinkActive="active"
+        (click)="onSubmit(loginForm)"
         [disabled]="!loginForm.valid"
       >
         Submit
       </button>
+    </div>
+    <div *ngIf="isLoading">
+      <svg
+        width="48"
+        height="48"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="xMidYMid"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="45"
+          fill="none"
+          stroke="#f00"
+          stroke-width="10"
+        />
+      </svg>
+    </div>
       <button class="btn btn-secondary m-2" type="button" (click)="onClear()">
         Clear
       </button>
-      <p class="alert alert-danger mt-3" *ngIf="errorMsg">{{ errorMsg }}</p>
     </form>
   </div>
 </div>
