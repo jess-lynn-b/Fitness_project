@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  NgForm,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { AuthService, AuthResData } from '../../auth.service';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-login',
@@ -16,41 +11,63 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  authObsv: Observable<AuthResData> | any;
-  isLoginMode = true;
-  errorMsg: string | null = null;
-  subscription!: Subscription;
-  loginForm: any;
+  isAuthenticated = false;
   hasSubmitted!: boolean;
+  isLoginMode = true;
+  loginForm: any;
+  errorMsg: string | null = null;
+  isLoading = false;
+  authObsv: Observable<AuthResData> | any;
 
-  get email(){ return this.loginForm.get('email');}
-  get password(){ return this.loginForm.get('password');}
+  get email() {
+    return this.loginForm.get('email');
+  }
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  private userSub!: Subscription;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private afAuth: AngularFireAuth,
+    private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {
-    this.loginForm = this.formBuilder.group ({
-      email : ['',[Validators.required]],
-      password : ['',[Validators.required, Validators.minLength(6)]]
+  ) {}
+
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+    this.userSub = this.authService.currUser.subscribe((user) => {
+      this.isAuthenticated = !!user;
+      console.log(!user);
     });
   }
 
-  ngOnInit(): void {}
-
   onSubmit(form: NgForm) {
-    this.hasSubmitted = true;
-    const loginForm = form.value;
-    const { email, password } = form.value;
-    if (!form.valid || !email || !password) return;
-    console.log(loginForm);
-    if (this.isLoginMode){
-      this.authObsv = this.authService.loginWithEmailPassword ({
-        email, password,
-        returnSecureToken: false
-      });
-    }
+    this.isLoading = true;
+    const email = document.getElementById('email') as HTMLInputElement;
+    const password = document.getElementById('password') as HTMLInputElement;
+
+    let requestData = {
+      email: email.value,
+      password: password.value,
+      returnSecureToken: true
+    };
+
+    this.authService.loginWithEmailPassword
+    (requestData)
+      ?.subscribe(() => {
+        this.isLoading = false;
+        email.value = '';
+        password.value = '';
+      })
+      // catch((error: { message: any }) => {
+      //   this.isLoading = false;
+      //   alert(error.message);
+      // });
   }
   onClear() {
     this.loginForm.reset();

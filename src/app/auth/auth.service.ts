@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, of, tap } from 'rxjs';
 import { firebaseConfig } from 'src/app/enviroments/enviroment';
 import { User } from 'src/app/auth/user.model';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 // * Constants \\
 const FIREBASE_WEB_API_KEY = firebaseConfig.apiKey;
 const FIREBASE_SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signup?key=${FIREBASE_WEB_API_KEY}`;
@@ -29,7 +30,7 @@ export class AuthService {
   currUser = new BehaviorSubject<User>(null!);
   private tokenExpirationTimer: any;
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private afAuth: AngularFireAuth) {}
 
   signUpWithEmailPassword(authData: AuthReqData) {
     if (!authData.email || !authData.password) return;
@@ -49,18 +50,23 @@ export class AuthService {
   }
   loginWithEmailPassword(authData: AuthReqData) {
     if (!authData.email || !authData.password) return;
-    const authRes = this.http
-      .post<AuthResData>(FIREBASE_LOGIN_URL, {
-        ...authData,
-        returnSecureToken: true,
-      })
-      .pipe(
-        tap((res) => {
-          const { email, localId, idToken, expiresIn } = res;
-          this.handleAuth(email, localId, idToken, +expiresIn);
-        })
-      );
-    return authRes;
+    let headers = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', '*');
+
+    // const authRes = this.http
+    //   .post<AuthResData>(FIREBASE_LOGIN_URL, {
+    //     ...authData,
+    //     returnSecureToken: true,
+    //   }, {headers})
+    //   .pipe(
+    //     tap((res) => {
+    //       const { email, localId, idToken, expiresIn } = res;
+    //       this.handleAuth(email, localId, idToken, +expiresIn);
+    //     })
+    //   );
+
+    this.afAuth.signInWithEmailAndPassword(authData.email, authData.password).then(response => console.log(response))
+    return of(null);
   }
   signOut() {
     this.currUser.next(null!);
