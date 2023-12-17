@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FoodService } from '../data-tracker/food-log/food.service';
 
 
 @Component({
@@ -6,9 +7,27 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  constructor() {}
+  constructor(
+    private foodService: FoodService
+  ) {}
+
+  ngOnInit(): void {
+
+  }
 
   sampleUserimg = 'https://images.pexels.com/photos/18554689/pexels-photo-18554689/free-photo-of-a-street-at-night-photographed-in-long-exposure.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load';
+
+  calculateProgress(): number {
+    const totalRecommendedCalories = 1000;
+    let currentCalorieTotal = 0;
+
+    const foodLogs = this.foodService.getFoods();
+    for(let i in foodLogs) {
+      currentCalorieTotal += foodLogs[i].calories;
+    }
+    console.log(foodLogs);
+    return currentCalorieTotal / totalRecommendedCalories * 100;
+  }
 }

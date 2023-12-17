@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FoodListComponent } from './food-list/food-list.component';
+import { FoodService } from './food.service';
+import { Food } from './food.model';
 
 @Component({
   selector: 'app-food-log',
@@ -9,15 +10,25 @@ import { FoodListComponent } from './food-list/food-list.component';
 })
 
 export class FoodLogComponent implements OnInit {
+  foodLogs: Food[] = [];
 
   constructor(
+    private foodService: FoodService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.foodService.FoodChanged.subscribe((foodLogs: Food[]) => {
+      this.foodLogs = foodLogs;
+      console.log(foodLogs);
+    })
   }
 
-  onAddFood() {
-    this.router.navigate(['food-list'], { relativeTo: this.route });
+  onAddFood(category: string) {
+    this.router.navigate(['add-log', category ], { relativeTo: this.route });
+  }
+
+  getFoodByCategory(category: string) {
+    return this.foodLogs.filter(food => food.category === category)
   }
 }
