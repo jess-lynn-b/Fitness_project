@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FoodService } from '../food.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,6 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class FoodListComponent implements OnInit {
+  @Output() toggleModal: EventEmitter<void> = new EventEmitter<void>();
+
+  @Input() isModalVisible = false;
+
 
   title: string = '';
   calories: number = 0;
