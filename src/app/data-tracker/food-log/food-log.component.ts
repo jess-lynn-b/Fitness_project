@@ -30,7 +30,7 @@ export class FoodLogComponent implements OnInit {
   }
 
   onAddFood(category: string) {
-    // this.showModal = true;
+    this.showModal = true;
 
     this.router.navigate(['add-log', category ], { relativeTo: this.route });
   }

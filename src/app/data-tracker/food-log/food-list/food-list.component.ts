@@ -47,7 +47,7 @@ export class FoodListComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/data-tracker/food-log']);
+    this.isModalVisible = false;
   }
 
 }
