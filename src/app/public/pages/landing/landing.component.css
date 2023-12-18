@@ -1,12 +1,32 @@
 button{
-  color: black;
+  color: whitesmoke;
   background: transparent;
-  border: 2px solid magenta;
+  border: 2px solid pink;
+  cursor: pointer;
+  box-shadow: 2px 5px whitesmoke;
 }
-button:hover {
+
+:hover{
   background: transparent;
-  color: aliceblue;
+  color: whitesmoke;
+
 }
 .background{
-  color:
+  background-image: url("https://e0.pxfuel.com/wallpapers/52/830/desktop-wallpaper-food-background-food-food-recipes-food-menu-greek-food.jpg");
+  background-size: auto;
+  padding:8em;
+
+}
+h1{
+  color:whitesmoke;
+  text-shadow: 2px 2px black;
+}
+h3{
+  color:whitesmoke;
+  text-shadow: 2px 2px black;
+}
+p{
+  color:whitesmoke;
+  text-shadow: 1px 1px black;
+  padding: 1em;
 }
