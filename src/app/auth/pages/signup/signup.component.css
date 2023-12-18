@@ -5,16 +5,19 @@
   background-repeat: no-repeat;
 }
 button{
+  background: rgba(128, 128, 128, 0.601);
   color: whitesmoke;
-  background: transparent;
-  border: 2px solid pink;
+  border: 3px solid darkred;
   cursor: pointer;
-  box-shadow: 2px 2px whitesmoke;
+  box-shadow: 3px 5px whitesmoke;
+  opacity: 1;
 }
 button:hover {
   background: transparent;
-  color: whitesmoke;
-  border: 2px solid blue;
+  color: crimson;
+  text-shadow: 1px 1px whitesmoke;
+  border: 2px solid black;
+  cursor: pointer;
 }
 h1{
   color: whitesmoke;

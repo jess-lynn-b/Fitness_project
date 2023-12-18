@@ -1,14 +1,18 @@
 button{
-  color: whitesmoke;
-  background: transparent;
-  border: 2px solid pink;
+  background:rgba(128, 128, 128, 0.601);
+  border: 3px solid crimson;
   cursor: pointer;
-  box-shadow: 2px 5px whitesmoke;
+  box-shadow: 3px 5px whitesmoke;
+  opacity: 1;
 }
-
-:hover{
+a{
+  color:honeydew;
+  text-shadow: 1px 1px black;
+}
+button:hover{
   background: transparent;
-  color: whitesmoke;
+  color: darkred;
+  cursor: pointer;
 
 }
 .background{
