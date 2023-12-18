@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from './food.service';
 import { Food } from './food.model';
@@ -10,6 +10,11 @@ import { Food } from './food.model';
 })
 
 export class FoodLogComponent implements OnInit {
+
+  toggleModal: EventEmitter<void> = new EventEmitter<void>();
+
+  showModal: boolean = false;
+
   foodLogs: Food[] = [];
 
   constructor(
@@ -25,10 +30,22 @@ export class FoodLogComponent implements OnInit {
   }
 
   onAddFood(category: string) {
+    // this.showModal = true;
+
     this.router.navigate(['add-log', category ], { relativeTo: this.route });
   }
 
   getFoodByCategory(category: string) {
     return this.foodLogs.filter(food => food.category === category)
   }
+
+  totalCaloriesLogged() {
+    let totalCalories = 0;
+
+    for (let i = 0; i < this.foodLogs.length; i++) {
+      totalCalories += this.foodLogs[i].calories;
+    }
+    return totalCalories;
+  }
+
 }
