@@ -1,5 +1,7 @@
+<div class="background">
 <div class="container">
-  <h2>Login</h2>
+  <h1>Login</h1>
+  <hr>
   <div class="justify-content-center align-items-center">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
       <div class="form-group">
@@ -55,13 +57,15 @@
       <br>
       <div class="d-flex justify-content-around">
       <button
-        class="btn btn-primary float-right m-2"
+        class="btn btn-primary"
         type="submit"
         routerLinkActive="active"
         (click)="onSubmit(loginForm)"
-        [disabled]="!loginForm.valid"
       >
         Submit
+      </button>
+      <button class="btn btn-secondary" type="button" (click)="onClear()">
+        Clear
       </button>
     </div>
     <div *ngIf="isLoading">
@@ -81,9 +85,7 @@
         />
       </svg>
     </div>
-      <button class="btn btn-secondary m-2" type="button" (click)="onClear()">
-        Clear
-      </button>
     </form>
   </div>
+</div>
 </div>
