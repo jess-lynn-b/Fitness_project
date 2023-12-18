@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CaloricIntakeComponent } from './caloric-intake.component';
+import { CaloricIntakeComponent } from '../caloric-intake/caloric-intake.component';
 
 describe('CaloricIntakeComponent', () => {
   let component: CaloricIntakeComponent;
