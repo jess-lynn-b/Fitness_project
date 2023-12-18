@@ -48,4 +48,10 @@ export class FoodLogComponent implements OnInit {
     return totalCalories;
   }
 
+  onEditFood(foodId: number) {
+    this.foodService.startedEditing.next(foodId);
+
+    this.router.navigate(['edit', foodId]);
+  }
+
 }

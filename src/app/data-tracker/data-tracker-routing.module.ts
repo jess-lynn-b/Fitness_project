@@ -5,6 +5,7 @@ import { FoodLogComponent } from './food-log/food-log.component';
 import { ActivityTrackerComponent } from './activity-tracker/activity-tracker.component';
 import { TrackerComponent } from './tracker/tracker.component';
 import { FoodListComponent } from './food-log/food-list/food-list.component';
+import { FoodDetailComponent } from './food-log/food-detail/food-detail.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
             path: 'add-log/:category',
             component: FoodListComponent
           },
+          {
+            path: 'edit-log/:id',
+            component: FoodDetailComponent,
+          }
         ],
       },
       {
