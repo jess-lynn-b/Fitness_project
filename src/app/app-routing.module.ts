@@ -17,6 +17,7 @@ const routes: Routes = [
 
   { path: 'data-tracker', loadChildren: () => import('./data-tracker/data-tracker.module').then(m => m.DataTrackerModule) },
   { path: '', loadChildren: () => import('./public/public.module').then(m => m.PublicModule) }
+  
 
 ];
 
