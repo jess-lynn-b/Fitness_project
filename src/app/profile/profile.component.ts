@@ -4,6 +4,7 @@ import { ProfileUserModel } from '../shared/models/profile_user.model';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from '../auth/services/user.service';
 import { ProfileModel } from '../shared/models/profile.model';
+import { TrackerComponent } from '../data-tracker/tracker/tracker.component';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,7 @@ import { ProfileModel } from '../shared/models/profile.model';
 export class ProfileComponent implements OnInit {
   form: FormGroup;
   user: ProfileUserModel;
+  info: ProfileModel
   isProfileEmpty: boolean;
   apiAction: string;
   isLoading: boolean;
@@ -20,17 +22,22 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
-    this.form = formBuilder.group({
+    this.form = this.formBuilder.group({
       name: '',
       email: '',
-      Weight: '',
+      currWeight: '',
       targetWeight: '',
       estTime: '',
-    });
+    })
+    this.info = {
+      currWeight: '',
+      targetWeight: '',
+      estTime: '',
+    };
     this.user = {
-      name: '',
+      username: '',
       id: '',
       isactive: false,
     };
@@ -42,7 +49,12 @@ export class ProfileComponent implements OnInit {
     this.userService.getMe().subscribe((data: ProfileUserModel) => {
       this.user = data;
     });
-  
+
+  }
+  currWeight(){
+    // this.form.currWeight((data: TrackerComponent) => {
+    //   this.currWeight
+    // })
   }
   logout(): void {
     this.authService.logout();

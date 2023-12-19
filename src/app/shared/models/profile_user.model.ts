@@ -1,5 +1,5 @@
 export class ProfileUserModel {
-  name = '';
+  username = '';
   isactive = false;
   id= '';
 }
