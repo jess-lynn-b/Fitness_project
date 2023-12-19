@@ -1,12 +1,37 @@
 button{
-  color: black;
+  color: whitesmoke;
   background: transparent;
-  border: 2px solid magenta;
+  border: 3px solid #272640;
+  cursor: pointer;
+  box-shadow: 3px 5px whitesmoke;
 }
-button:hover {
-  background: transparent;
-  color: aliceblue;
+a{
+  color:honeydew;
+  text-shadow: 1px 1px black;
+}
+button:hover{
+  background: #1B3A4B;
+  color: whitesmoke;
+  text-shadow: 1px 1px #4D194d;
+  cursor: pointer;
+  border: 2px solid #272640;
+
 }
 .background{
-  color:
+  background-color: #006466;
+  background-size: auto;
+  padding: 10%;
+}
+h1{
+  color:whitesmoke;
+  text-shadow: 2px 2px black;
+}
+h3{
+  color:whitesmoke;
+  text-shadow: 2px 2px black;
+}
+p{
+  color:whitesmoke;
+  text-shadow: 1px 1px black;
+  padding: 1em;
 }

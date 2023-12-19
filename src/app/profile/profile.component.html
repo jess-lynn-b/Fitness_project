@@ -1,1 +1,53 @@
-<p>profile works!</p>
+<section class="vh-100" style="background-color: #006466">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-md-9 col-lg-7 col-xl-5">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-4">
+            <div class="d-flex text-black">
+              <div class="flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Generic placeholder image" class="img-fluid"
+                  style="width: 180px; border-radius: 10px;">
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h5 class="name"> Hello , {{ user.username }} </h5>
+                <br>
+                <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                  style="background-color: #efefef;">
+                  <div>
+                    <p class="small mb-1">Current Weight</p>
+                    <p class="mb-0">{{ info.currWeight }} </p>
+                  </div>
+                  <div class="px-3">
+                    <p class="small mb-1">Goal</p>
+                    <p class="mb-0">{{ info.targetWeight }}</p>
+                  </div>
+                  <div>
+                    <p class="small mb-1">Est Goal Date</p>
+                    <p class="mb-0">{{ info.estTime }} </p>
+                  </div>
+                </div>
+                <div class="d-flex pt-1">
+                  <button
+                  type="button"
+                  class="btn btn-outline-primary me-1 flex-grow-1"
+                  routerLinkActive="active"
+                  routerLink="/dashboard">
+                  Dashboard
+                </button>
+                  <button
+                  type="button"
+                  class="btn btn-primary flex-grow-1"
+                  routerLinkActive="active"
+                  routerLink="/food-log"
+                  >Add Food</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

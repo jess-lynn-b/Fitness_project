@@ -9,6 +9,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 })
 export class FoodService {
   FoodChanged = new BehaviorSubject<Food[]>([]);
+  startedEditing = new Subject<number>();
 
   private foods: any[] = [];
   // private foods: Food[] = [
@@ -29,19 +30,37 @@ export class FoodService {
     return this.foods.filter(food => food.category === category).slice();
   }
 
+  getFoodId(id: number): Food {
+    return this.foods.find(food => food.id === id);
+  }
+
   addFood(food: any) {
     console.log(food);
     this.foods.push(food);
     this.FoodChanged.next(this.foods.slice());
   }
 
-  updateFood(index: number, newFood: Food) {
-    this.foods[index] = newFood;
-    this.FoodChanged.next(this.foods.slice());
+  updateFood(index: number, updatedFood: Food): void {
+    const currentMeal = this.foods[index];
+    if (currentMeal) {
+      this.foods[index] = {
+        ...currentMeal, ... updatedFood };
+        this.FoodChanged.next(this.foods.slice());
+      }
+    }
+
+
+  editFood(index: number, newFood: Food) {
+    if (index >= 0 && index < this.foods.length) {
+      this.foods[index] = newFood;
+      this.FoodChanged.next(this.foods.slice());
+    }
   }
 
   deleteFood(index: number) {
-    this.foods.splice(index, 1);
-    this.FoodChanged.next(this.foods.slice());
+    if(index >= 0 && index < this.foods.length)
+      this.foods.splice(index, 1);
+      this.FoodChanged.next(this.foods.slice());
   }
 }
+

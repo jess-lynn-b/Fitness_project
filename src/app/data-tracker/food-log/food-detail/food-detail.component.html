@@ -1,1 +1,44 @@
-<p>food-detail works!</p>
+<div class="modal" [class.show]="isModalVisible" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <form [formGroup]="foodForm" (ngSubmit)="onUpdateFood()">
+        <input
+          type="text"
+          formControlName="title"
+          class="form-control">
+        <input
+          type="number"
+          formControlName="calories"
+          class="form-control">
+        <select
+          class="form-control"
+          formControlName="category">
+            <option value="" selected disabled>Category
+            </option>
+            <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snacks">Snacks</option>
+        </select>
+        <textarea
+          class="form-control"
+          formControlName="notes"
+          id="notes"
+          name="notes">
+        </textarea>
+        <button
+          type="button"
+          class="btn btn-dark"
+          (click)="onCancel()">Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-success">Update
+        </button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+

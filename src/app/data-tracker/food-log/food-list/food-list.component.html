@@ -1,41 +1,58 @@
-<div class="row">
-  <div class="col-md-12 col-sm-12">
-    <form #foodForm="ngForm" (ngSubmit)="onCreateFood()">
-      <input
-        [(ngModel)]="title"
-        type="text"
-        name="title"
-        placeholder="Title">
-      <label for="calories">Calories: </label>
-      <input
-        [(ngModel)]="calories"
-        type="number"
-        name="calories"
-        placeholder="Calories">
-      <div class="form-group">
-        <label
-          for="notes">
-          Notes:
-        </label>
-        <textarea
-          class="form-control"
-          [(ngModel)]="notes"
-          id="notes"
-          name="notes"
-          rows="4"></textarea>
+<div class="modal fade"
+  [ngStyle]="{'display': isModalVisible ? 'block' : 'none'}" [class.show]="isModalVisible" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Log My Meal</h1>
+        <form #foodForm="ngForm" (ngSubmit)="onCreateFood()">
+          <input
+            [(ngModel)]="title"
+            type="text"
+            name="title"
+            placeholder="Title">
+          <label for="calories">Calories: </label>
+          <input
+            [(ngModel)]="calories"
+            type="number"
+            name="calories"
+            placeholder="Calories">
+          <select
+            [(ngModel)]="category"
+            class="form-control"
+            id="category"
+            name="category">
+              <option value="" selected disabled>Category?</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snacks">Snacks</option>
+          </select>
+          <div class="form-group">
+            <label
+              for="notes">
+              Notes:
+            </label>
+            <textarea
+              class="form-control"
+              [(ngModel)]="notes"
+              id="notes"
+              name="notes"
+              rows="4"></textarea>
+          </div>
+          <br>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            >Add Food
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark"
+            (click)="onCancel()"
+            >Cancel
+          </button>
+        </form>
       </div>
-      <br>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        >Add Food
-      </button>
-      <button
-        type="button"
-        class="btn btn-dark"
-        (click)="onCancel()"
-        >Cancel
-      </button>
-    </form>
+    </div>
   </div>
 </div>

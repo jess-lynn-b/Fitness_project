@@ -1,10 +1,114 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FoodService } from '../food.service';
+import { Food } from '../food.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-food-detail',
   templateUrl: './food-detail.component.html',
   styleUrls: ['./food-detail.component.css']
 })
-export class FoodDetailComponent {
+export class FoodDetailComponent implements OnInit {
+  @Input() food: Food | undefined;
+  subscription: Subscription | undefined;
+  foodId: number = 0;
+  foodDetails!: Food;
+  editMode = false;
+  editedFoodIndex!: number;
 
+  foodForm!: FormGroup;
+
+  @Input() isModalVisible = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private foodService: FoodService) {}
+
+  ngOnInit(): void {
+    this.subscription = this.foodService.startedEditing
+      .subscribe(
+        (index: number) => {
+          this.editedFoodIndex = index;
+          this.editMode = true;
+          this.food = this.foodService.getFoodId(index);
+
+          if (this.food) {
+            this.initForm();
+            this.isModalVisible = true;
+          }
+        }
+      );
+
+    if (!this.foodForm) {
+      this.initForm();
+    }
+  }
+
+  private initForm() {
+    let foodTitle = '';
+    let foodCalories = 0;
+    let foodNotes = '';
+    let foodCategory = '';
+
+    if (this.editMode && this.food) {
+      foodTitle = this.food.title;
+      foodCalories = this.food.calories;
+      foodNotes = this.food.notes;
+      foodCategory = this.food.category;
+    }
+
+    this.foodForm = new FormGroup({
+      'title': new FormControl(foodTitle, Validators.required),
+      'calories': new FormControl(foodCalories, Validators.required),
+      'notes': new FormControl(foodNotes),
+      'category': new FormControl(foodCategory, Validators.required),
+    });
+  }
+
+  onUpdateFood() {
+    const value = this.foodForm.value;
+
+    if (typeof this.editMode === 'boolean') {
+      let newFood: Food;
+
+      if (this.editMode && this.food) {
+        newFood = new Food(
+          this.food.id || 0,
+          value.title,
+          value.calories,
+          value.category,
+          value.notes
+        );
+      } else {
+        newFood = new Food(
+          value.id,
+          value.title,
+          value.calories,
+          value.category,
+          value.notes
+        );
+      }
+
+      if (this.editMode) {
+        this.foodService.editFood(this.editedFoodIndex, newFood);
+      } else {
+        this.foodService.addFood(newFood);
+      }
+
+      this.editMode = false;
+      this.foodForm.reset();
+      this.isModalVisible = false;
+    }
+  }
+
+  onCancel() {
+    this.isModalVisible = false;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
 }
