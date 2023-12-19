@@ -49,6 +49,14 @@
         <ul>
           <li *ngFor="let food of getFoodByCategory('breakfast')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
+            </a>
           </li>
         </ul>
       </div>
@@ -81,6 +89,14 @@
         <ul>
           <li *ngFor="let food of getFoodByCategory('lunch')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
+            </a>
           </li>
         </ul>
       </div>
@@ -111,6 +127,14 @@
         <ul>
           <li *ngFor="let food of getFoodByCategory('dinner')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
+            </a>
           </li>
         </ul>
       </div>
@@ -141,10 +165,13 @@
         <ul>
           <li *ngFor="let food of getFoodByCategory('snacks')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
-            <a class="edit-food" style="cursor: pointer;"
-            role="button"
-            (click)="onEditFood(food.id)">
-              <img src="./assets/icons/edit.svg" alt="edit-icon">
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
             </a>
           </li>
         </ul>
