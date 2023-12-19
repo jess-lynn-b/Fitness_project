@@ -1,21 +1,27 @@
 <div class="modal fade"
   [ngStyle]="{'display': isModalVisible ? 'block' : 'none'}" [class.show]="isModalVisible" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content box-display">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Log My Meal</h1>
+        <h1
+          style="color: aliceblue;"
+          class="modal-title fs-5" id="staticBackdropLabel">Log My Meal</h1>
         <form #foodForm="ngForm" (ngSubmit)="onCreateFood()">
           <input
             [(ngModel)]="title"
             type="text"
             name="title"
             placeholder="Title">
-          <label for="calories">Calories: </label>
-          <input
-            [(ngModel)]="calories"
-            type="number"
-            name="calories"
-            placeholder="Calories">
+            <input
+              [(ngModel)]="calories"
+              type="number"
+              name="calories"
+              placeholder="Calories">
+            <label
+              style="color: aliceblue;
+              margin-left: 5px;"
+              for="calories">Calories
+            </label>
           <select
             [(ngModel)]="category"
             class="form-control"
@@ -29,6 +35,7 @@
           </select>
           <div class="form-group">
             <label
+              style="color: aliceblue;"
               for="notes">
               Notes:
             </label>
@@ -41,6 +48,7 @@
           </div>
           <br>
           <button
+            style="background: transparent; border: 3px solid #065a60;"
             type="submit"
             class="btn btn-primary"
             >Add Food

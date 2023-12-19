@@ -47,8 +47,18 @@
           </p>
         </div>
         <ul>
-          <li *ngFor="let food of getFoodByCategory('breakfast')">
+          <li
+            style="color: aliceblue;"
+            *ngFor="let food of getFoodByCategory('breakfast')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
+            </a>
           </li>
         </ul>
       </div>
@@ -81,6 +91,14 @@
         <ul>
           <li *ngFor="let food of getFoodByCategory('lunch')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
+            </a>
           </li>
         </ul>
       </div>
@@ -111,6 +129,14 @@
         <ul>
           <li *ngFor="let food of getFoodByCategory('dinner')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
+            </a>
           </li>
         </ul>
       </div>
@@ -141,10 +167,13 @@
         <ul>
           <li *ngFor="let food of getFoodByCategory('snacks')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
-            <a class="edit-food" style="cursor: pointer;"
-            role="button"
-            (click)="onEditFood(food.id)">
-              <img src="./assets/icons/edit.svg" alt="edit-icon">
+            <a
+              class="edit-food" style="cursor: pointer;"
+              role="button"
+              (click)="onEditFood(food.id)">
+              <img
+                src="./assets/icons/edit.svg"
+                alt="edit-icon">
             </a>
           </li>
         </ul>
@@ -161,12 +190,20 @@
     <div
       class="row"
       style="border: solid lightgrey 0.5px;">
-      <div class="col-md-12 col-sm-12">
-        <p>Day Calories</p>
-        <p>{{ totalCaloriesLogged() }}</p>
+      <div
+        class="col-md-12 col-sm-12"
+        style="display: flex; justify-content: space-between;">
+        <p
+          style="color: aliceblue;">
+          Day Calories
+        </p>
+        <p
+          style="color: aliceblue;">
+          {{ totalCaloriesLogged() }}
+        </p>
       </div>
     </div>
-    <div
+    <!-- <div
       class="row"
       style="border: solid lightgrey 0.5px;">
       <div class="col-md-12 col-sm-12">
@@ -177,8 +214,8 @@
             Complete Food Logging for Day
         </p>
       </div>
-    </div>
-    <div
+    </div> -->
+    <!-- <div
       class="row"
       style="border: solid lightgrey 0.5px;">
       <div class="col-md-12 col-sm-12">
@@ -190,12 +227,9 @@
             alt="down-arrow-icon">
         </p>
       </div>
-    </div>
+    </div> -->
 
-<div>
-  <p>Before app-food-list</p>
-    <app-food-list [isModalVisible]="showModal" (toggleModal)="showModal = false"></app-food-list>
-  <p>After app-food-list</p>
-</div>
 
-<!-- <app-food-list [isModalVisible]="showModal" (toggleModal)="showModal = false"></app-food-list> -->
+<app-food-list [isModalVisible]="showModal" (toggleModal)="showModal = false"></app-food-list>
+
+

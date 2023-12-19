@@ -1,7 +1,16 @@
-<div class="modal" [class.show]="isModalVisible" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
+<div
+  class="modal fade"
+  [ngStyle]="{'display': isModalVisible ? 'block' : 'none'}"
+  [class.show]="isModalVisible"
+  tabindex="-1"
+  role="dialog">
+  <div
+    class="modal-dialog
+    modal-dialog-centered">
+    <div
+      class="modal-content">
+      <div
+        class="modal-header">
         <form [formGroup]="foodForm" (ngSubmit)="onUpdateFood()">
         <input
           type="text"
