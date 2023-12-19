@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { CaloricIntakeComponent } from './caloric-intake/caloric-intake.component';
+import { CaloricIntakeComponent } from './data-tracker/caloric-intake/caloric-intake.component';
 import { firebaseConfig } from './enviroments/enviroment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';

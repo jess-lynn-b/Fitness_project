@@ -30,7 +30,7 @@ export class FoodLogComponent implements OnInit {
   }
 
   onAddFood(category: string) {
-    // this.showModal = true;
+    this.showModal = true;
 
     this.router.navigate(['add-log', category ], { relativeTo: this.route });
   }
@@ -46,6 +46,12 @@ export class FoodLogComponent implements OnInit {
       totalCalories += this.foodLogs[i].calories;
     }
     return totalCalories;
+  }
+
+  onEditFood(foodId: number) {
+    this.foodService.startedEditing.next(foodId);
+
+    this.router.navigate(['edit', foodId]);
   }
 
 }

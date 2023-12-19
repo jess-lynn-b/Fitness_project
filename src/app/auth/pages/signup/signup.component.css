@@ -1,22 +1,20 @@
 .background{
-  background-image: url("https://thumbs.dreamstime.com/b/dark-rustic-aged-wooden-food-background-cutlery-seasoning-top-view-copy-space-your-design-recipes-menu-meal-text-123006922.jpg");
+  background-color: #006466;
   background-size: auto;
   padding: 8em;
-  background-repeat: no-repeat;
 }
 button{
-  background: rgba(128, 128, 128, 0.601);
+  background: transparent;
   color: whitesmoke;
-  border: 3px solid darkred;
+  border: 3px solid #272640;
   cursor: pointer;
   box-shadow: 3px 5px whitesmoke;
-  opacity: 1;
 }
 button:hover {
-  background: transparent;
-  color: crimson;
-  text-shadow: 1px 1px whitesmoke;
-  border: 2px solid black;
+  background: #1B3A4B;
+  color: whitesmoke;
+  text-shadow: 1px 1px #4D194d;
+  border: 2px solid #272640;
   cursor: pointer;
 }
 h1{
