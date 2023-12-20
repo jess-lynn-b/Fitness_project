@@ -5,7 +5,7 @@ div {
 button {
   border: 2px solid purple;
   background-color: inherit;
-  color: white;
+  color: darkcyan;
   padding: 10px 20px;
   cursor: pointer;
 }
@@ -38,7 +38,9 @@ ul {
 
 li {
   margin-bottom: 15px;
-  text-align: center; 
+  text-align: center;
 }
 
-
+body {
+  background-color: teal;
+}

@@ -1,6 +1,8 @@
 
-<div>
-  <h2>Weight Loss Calculator</h2>
+<body>
+  <div class="container">
+
+  <h2>Calculate Your Weight Loss Goal</h2>
   <form #weightLossForm="ngForm" (ngSubmit)="calculateTime()">
     <div>
       <label for="height">Height (cm/in):</label>
@@ -22,5 +24,8 @@
   <div *ngIf="estimatedTime">
     <p>Estimated time to lose {{ targetWeight - weight }} kg/lb: {{ estimatedTime }} weeks</p>
   </div>
-</div>
+
+  </div>
+  </body>
+
 

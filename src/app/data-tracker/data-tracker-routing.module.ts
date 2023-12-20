@@ -6,6 +6,7 @@ import { ActivityTrackerComponent } from './activity-tracker/activity-tracker.co
 import { TrackerComponent } from './tracker/tracker.component';
 import { FoodListComponent } from './food-log/food-list/food-list.component';
 import { FoodDetailComponent } from './food-log/food-detail/food-detail.component';
+import { CaloricIntakeComponent } from './caloric-intake/caloric-intake.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,9 @@ const routes: Routes = [
       },
       {
         path: 'activity-tracker', component: ActivityTrackerComponent
+      },
+      {
+        path: 'caloric-intake', component: CaloricIntakeComponent
       },
       {
         path: 'tracker', component: TrackerComponent
