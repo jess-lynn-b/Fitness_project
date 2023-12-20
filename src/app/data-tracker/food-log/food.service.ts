@@ -8,10 +8,10 @@ import { BehaviorSubject, Subject } from "rxjs";
   providedIn: 'root'
 })
 export class FoodService {
-  FoodChanged = new BehaviorSubject<Food[]>([]);
+  FoodChanged = new Subject<Food[]>();
   startedEditing = new Subject<number>();
 
-  private foods: any[] = [];
+  private foods: Food[] = [];
   // private foods: Food[] = [
   //   new Food(
   //     'Carne Asada Tacos',
@@ -30,8 +30,9 @@ export class FoodService {
     return this.foods.filter(food => food.category === category).slice();
   }
 
-  getFoodId(id: number): Food {
-    return this.foods.find(food => food.id === id);
+  getFoodId(id: number) {
+    const foundFood = this.foods.find((food) => food.id === id);
+    return foundFood;
   }
 
   addFood(food: any) {
@@ -61,6 +62,10 @@ export class FoodService {
     if(index >= 0 && index < this.foods.length)
       this.foods.splice(index, 1);
       this.FoodChanged.next(this.foods.slice());
+  }
+  setFood(food: Food[]) {
+    this.foods = food;
+    this.FoodChanged.next(this.foods.slice());
   }
 }
 

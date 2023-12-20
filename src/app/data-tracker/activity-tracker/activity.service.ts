@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Exercise } from '../../shared/models/exercise.model';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -8,11 +9,15 @@ import { Exercise } from '../../shared/models/exercise.model';
 export class ActivityService {
   private activities: Exercise[] = [];
 
+  activityListChanged = new Subject<Exercise[]>();
+  constructor(){}
+
   getActivities(): Exercise[] {
-    return this.activities;
+    return this.activities.slice();
   }
 
-  addActivity(activity: Exercise): void {
-    this.activities.push(activity);
+  addActivity(newActivity: Exercise) {
+    this.activities.push(newActivity);
+    this.activityListChanged.next(this.activities.slice());
   }
 }
