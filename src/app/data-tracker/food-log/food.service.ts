@@ -45,16 +45,20 @@ export class FoodService {
     const currentMeal = this.foods[index];
     if (currentMeal) {
       this.foods[index] = {
-        ...currentMeal, ... updatedFood };
+        ...currentMeal, ...updatedFood };
         this.FoodChanged.next(this.foods.slice());
       }
     }
 
 
-  editFood(index: number, newFood: Food) {
+  editFood(index: number, editedFood: Food) {
     if (index >= 0 && index < this.foods.length) {
-      this.foods[index] = newFood;
-      this.FoodChanged.next(this.foods.slice());
+      const existingFood = this.foods.find(food => food.id === editedFood.id);
+
+      if (existingFood) {
+        Object.assign(existingFood, editedFood);
+        this.FoodChanged.next(this.foods.slice());
+      }
     }
   }
 
