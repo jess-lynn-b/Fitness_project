@@ -8,17 +8,11 @@ import { BehaviorSubject, Subject } from "rxjs";
   providedIn: 'root'
 })
 export class FoodService {
-  FoodChanged = new Subject<Food[]>();
+  FoodChanged = new BehaviorSubject<Food[]>([]);
   startedEditing = new Subject<number>();
 
-  private foods: Food[] = [];
-  // private foods: Food[] = [
-  //   new Food(
-  //     'Carne Asada Tacos',
-  //     300,
-  //     "Delicious, did not feel full after eating but am satiated"
-  //   )
-  // ];
+  // private foods: Food[] = [];
+  private foods: any[] = [];
 
   constructor() {}
 
@@ -31,8 +25,9 @@ export class FoodService {
   }
 
   getFoodId(id: number) {
-    const foundFood = this.foods.find((food) => food.id === id);
-    return foundFood;
+    // const foundFood = this.foods.find((food) => food.id === id);
+    // return foundFood;
+
   }
 
   addFood(food: any) {
