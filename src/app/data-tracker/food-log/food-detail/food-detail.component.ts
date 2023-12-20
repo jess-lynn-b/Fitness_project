@@ -34,7 +34,7 @@ export class FoodDetailComponent implements OnInit {
         (index: number) => {
           this.editedFoodIndex = index;
           this.editMode = true;
-          this.food = this.foodService.getFoodById(this.foodService.getFoods(), index);
+          // this.food = this.foodService.getFoodById(this.foodService.getFoods(), index);
 
           console.log('EditMode:', this.editMode);
           console.log('Food:', this.food);
