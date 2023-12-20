@@ -8,7 +8,7 @@ import { BehaviorSubject, Subject } from "rxjs";
   providedIn: 'root'
 })
 export class FoodService {
-  FoodChanged = new BehaviorSubject<Food[]>([]);
+  FoodChanged = new Subject<Food[]>();
   startedEditing = new Subject<number>();
 
   private foods: any[] = [];
@@ -44,16 +44,20 @@ export class FoodService {
     const currentMeal = this.foods[index];
     if (currentMeal) {
       this.foods[index] = {
-        ...currentMeal, ... updatedFood };
+        ...currentMeal, ...updatedFood };
         this.FoodChanged.next(this.foods.slice());
       }
     }
 
 
-  editFood(index: number, newFood: Food) {
+  editFood(index: number, editedFood: Food) {
     if (index >= 0 && index < this.foods.length) {
-      this.foods[index] = newFood;
-      this.FoodChanged.next(this.foods.slice());
+      const existingFood = this.foods.find(food => food.id === editedFood.id);
+
+      if (existingFood) {
+        Object.assign(existingFood, editedFood);
+        this.FoodChanged.next(this.foods.slice());
+      }
     }
   }
 
@@ -61,6 +65,10 @@ export class FoodService {
     if(index >= 0 && index < this.foods.length)
       this.foods.splice(index, 1);
       this.FoodChanged.next(this.foods.slice());
+  }
+  setFood(food: Food[]) {
+    this.foods = food;
+    this.FoodChanged.next(this.foods.slice());
   }
 }
 
