@@ -1,5 +1,7 @@
-<div>
-  <h2>Caloric Intake Calculator</h2>
+<body>
+
+  <div class="container">
+  <h2>Recommended Daily Caloric Intake</h2>
   <div>
     <label for="weight">Weight (kg/lb):</label>
     <input type="number" id="weight" [(ngModel)]="weight">
@@ -36,5 +38,6 @@
     <p>BMR: {{ bmr.toFixed(2) }} kcal/day</p>
     <p>TDEE: {{ tdee.toFixed(2) }} kcal/day</p>
   </div>
-</div>
 
+</div>
+</body>

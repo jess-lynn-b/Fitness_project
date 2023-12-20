@@ -1,7 +1,7 @@
 <div>
   <footer class="bottom-header">
     <div
-      style="background-color: #de9191;
+      style="background-color: paleturquoise;
       display: flex;
       justify-content: space-evenly;
       height: 50px;">
@@ -11,12 +11,28 @@
         Home
       </a>
       <a style="display: grid; font-size: smaller; cursor: pointer;"
+      routerLink="/data-tracker/caloric-intake">
+      <img style="height: 30px;
+        margin-left: 10px;
+        margin-top: 2px;
+        height: 30px;" src="assets/icons/add.svg" alt="add-icon">
+        Caloric Intake
+      </a>
+      <a style="display: grid; font-size: smaller; cursor: pointer;"
+      routerLink="/data-tracker/activity-tracker">
+      <img style="height: 30px;
+        margin-left: 10px;
+        margin-top: 2px;
+        height: 30px;" src="assets/icons/add.svg" alt="add-icon">
+        Activity Log
+      </a>
+      <a style="display: grid; font-size: smaller; cursor: pointer;"
       routerLink="/data-tracker/food-log">
         <img style="height: 30px;
         margin-left: 10px;
         margin-top: 2px;
         height: 30px;" src="assets/icons/add.svg" alt="add-icon">
-        Log Food
+        Food Log
       </a>
       <a style="display: grid; font-size: smaller; cursor: pointer;">
         <img style="height: 30px;" src="assets/icons/profile-icon.svg" alt="profile-icon"
@@ -25,7 +41,7 @@
       </a>
       <a style="display: grid; font-size: smaller; cursor: pointer;">
         <img style="height: 30px;" src="assets/icons/logout-icon.svg" alt="logout-icon">
-        Logout
+        Log Out
       </a>
     </div>
   </footer>

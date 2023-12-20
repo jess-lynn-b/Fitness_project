@@ -5,6 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './data-tracker.component.html',
   styleUrls: ['./data-tracker.component.css']
 })
-export class DataTrackerComponent {
+export class DataTrackerComponent {}
 
-}
