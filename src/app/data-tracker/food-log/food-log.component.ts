@@ -13,9 +13,11 @@ export class FoodLogComponent implements OnInit {
 
   toggleModal: EventEmitter<void> = new EventEmitter<void>();
 
-  showModal: boolean = false;
+  showFoodModal: boolean = false;
+  showUpdateModal: boolean = false;
 
   foodLogs: Food[] = [];
+  selectedFood: Food | undefined;
 
   constructor(
     private foodService: FoodService,
@@ -30,7 +32,7 @@ export class FoodLogComponent implements OnInit {
   }
 
   onAddFood(category: string) {
-    this.showModal = true;
+    this.showFoodModal = true;
 
     this.router.navigate(['add-log', category ], { relativeTo: this.route });
   }
@@ -51,7 +53,12 @@ export class FoodLogComponent implements OnInit {
   onEditFood(foodId: number) {
     this.foodService.startedEditing.next(foodId);
 
-    this.router.navigate(['edit', foodId]);
+    const foodIndex = foodId + 1;
+    // this.selectedFood = this.foodLogs.find((food) => food.id === foodId);
+    this.showUpdateModal = true;
+
+    console.log(foodId);
+    this.router.navigate(['food-log','edit-log', foodIndex]);
   }
 
 }

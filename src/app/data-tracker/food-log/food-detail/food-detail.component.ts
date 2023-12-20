@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from '../food.service';
 import { Food } from '../food.model';
@@ -21,6 +21,7 @@ export class FoodDetailComponent implements OnInit {
   foodForm!: FormGroup;
 
   @Input() isModalVisible = false;
+  @Output() toggleModal: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,9 @@ export class FoodDetailComponent implements OnInit {
           this.editedFoodIndex = index;
           this.editMode = true;
           this.food = this.foodService.getFoodId(index);
+
+          console.log('EditMode:', this.editMode);
+          console.log('Food:', this.food);
 
           if (this.food) {
             this.initForm();
@@ -105,7 +109,7 @@ export class FoodDetailComponent implements OnInit {
   }
 
   onCancel() {
-    this.isModalVisible = false;
+    this.toggleModal.emit(false);
   }
 
   ngOnDestroy(): void {

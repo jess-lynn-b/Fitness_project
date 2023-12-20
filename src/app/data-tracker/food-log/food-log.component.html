@@ -48,7 +48,7 @@
         </div>
         <ul>
           <li
-            style="color: aliceblue;"
+
             *ngFor="let food of getFoodByCategory('breakfast')">
             {{ food.title }} - {{ food.calories }} calories - {{ food.notes }}
             <a
@@ -68,7 +68,7 @@
         <button
         type="button"
         class="btn btn-gray addBtn"
-        (click)="onAddFood('breakfast');showModal = true">
+        (click)="onAddFood('breakfast');showFoodModal = true">
         Add Food
       </button>
       </div>
@@ -107,7 +107,7 @@
       <button
         type="button"
         class="btn btn-gray addBtn"
-        (click)="onAddFood('lunch');showModal = true">
+        (click)="onAddFood('lunch'); showFoodModal = true">
         Add Food
       </button>
     </div>
@@ -145,7 +145,7 @@
       <button
         type="button"
         class="btn btn-gray addBtn"
-        (click)="onAddFood('dinner');showModal = true">
+        (click)="onAddFood('dinner');showFoodModal = true">
         Add Food
       </button>
     </div>
@@ -183,7 +183,7 @@
       <button
         type="button"
         class="btn btn-gray addBtn"
-        (click)="onAddFood('snacks');showModal = true">
+        (click)="onAddFood('snacks'); showFoodModal = true">
         Add Food
       </button>
     </div>
@@ -230,6 +230,7 @@
     </div> -->
 
 
-<app-food-list [isModalVisible]="showModal" (toggleModal)="showModal = false"></app-food-list>
+<app-food-list [isModalVisible]="showFoodModal" (toggleModal)="showFoodModal = false"></app-food-list>
 
+<app-food-detail [food]="selectedFood" [isModalVisible]="showUpdateModal" (toggleModal)="showUpdateModal = $event"></app-food-detail>
 
