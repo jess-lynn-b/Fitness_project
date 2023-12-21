@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
 }
@@ -44,3 +44,44 @@
   width: auto;
   height: 100px;
 }
+*/
+
+body {
+  background-color: teal;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.teal-background {
+  background-color: teal;
+  min-height: 100vh;
+}
+.white-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.footer {
+  background-color: teal;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+
