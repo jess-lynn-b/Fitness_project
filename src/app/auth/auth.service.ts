@@ -1,107 +1,130 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
-import { enviroment } from "src/app/enviroments/enviroment.prod";
-import { User } from "src/app/shared/models/user";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {  Router } from '@angular/router';
+import { BehaviorSubject, of, tap } from 'rxjs';
+import { firebaseConfig } from 'src/app/enviroments/enviroment';
+import { User } from 'src/app/auth/user.model';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+// * Constants \\
+const FIREBASE_WEB_API_KEY = firebaseConfig.apiKey;
+const FIREBASE_SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signup?key=${FIREBASE_WEB_API_KEY}`;
+const FIREBASE_LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:login?key=${FIREBASE_WEB_API_KEY}`;
 
-const WEB_API_KEY = enviroment.firebaseApiKey;
-const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:register?key=${WEB_API_KEY}`;
-const LOGIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:register?key=${WEB_API_KEY}`;
-
-export interface IAuthReqData {
+export interface AuthReqData {
   email: string;
   password: string;
   returnSecureToken?: boolean;
-};
-export interface IAuthResData{
+  name: string;
+}
+export interface AuthResData {
   kind: string;
   idToken: string;
   email: string;
+  name: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
   registered?: boolean;
-  password: string | any;
-  firstName: string;
-  lastName: string;
 }
 
 @Injectable({ providedIn: 'root' })
-
 export class AuthService {
-  currUser = new BehaviorSubject<User>(null!);
+  currUser = new BehaviorSubject<User | null>(null!);
   private tokenExpirationTimer: any;
 
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-  ){}
+  constructor(private router: Router, private http: HttpClient, private afAuth: AngularFireAuth) {}
 
-  login(authData: IAuthReqData){
-    if (!authData.email || !authData.password) return;
-
+  signUpWithEmailPassword(authData: AuthReqData) {
+    if (!authData.email || !authData.password || !authData.name ) return;
     const authRes = this.http
-      .post<IAuthResData> (LOGIN_URL , {
+      .post<AuthResData>(FIREBASE_SIGNUP_URL, {
         ...authData,
         returnSecureToken: true,
       })
       .pipe(
-        catchError(this.handleError),
-        tap(resData => {
-          this.handleAuth(
-            resData.email,
-            resData.password,
-            resData.idToken,
-            +resData.expiresIn);
+        tap((res) => {
+          const { email, localId, idToken, expiresIn } = res;
+
+          this.handleAuth(email, localId, idToken, +expiresIn);
         })
       );
-      return authRes;
+    return authRes;
   }
-
-  signup(authData: IAuthReqData){
-    if (!authData.email || !authData.password) return;
+  LoginWithEmailPassword(authData: AuthReqData) {
+    if (!authData.email || !authData.password ) return;
+    let headers = new HttpHeaders()
+      .set('Access-Control-Allow-Origin', '*');
 
     const authRes = this.http
-      .post<IAuthResData>
-      (SIGNUP_URL, {
+      .post<AuthResData>(FIREBASE_LOGIN_URL, {
         ...authData,
         returnSecureToken: true,
-      })
+      }, {headers})
       .pipe(
-        catchError(this.handleError),
-        tap(resData => {
-          this.handleAuth(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn);
+        tap((res) => {
+          const { email, localId, idToken, expiresIn } = res;
+          this.handleAuth(email, localId, idToken, +expiresIn);
         })
       );
-      return authRes;
   }
-  logout(){
+  logOut() {
+    this.currUser.next(null!);
+    this.router.navigate(['profile']);
+  }
+  autoLoginFromLocalStorage() {
+    const userData = localStorage.getItem('userData');
+    if (!userData) return;
+
+    const lsUser: {
+      id: string;
+      email: string;
+      _token: string;
+      _tokenExpDate: string;
+    } = JSON.parse(userData);
+
+    const newUser = new User(
+      lsUser.id,
+      lsUser.email,
+      lsUser._token,
+      new Date(lsUser._tokenExpDate)
+    );
+
+    if (newUser.token) {
+      this.currUser.next(newUser);
+
+      const expDuration = 
+        new Date(lsUser._tokenExpDate).getTime() - new Date().getTime();
+      this.autoLogout(expDuration);
+    }
+
+  }
+  logout() {
+    this.currUser.next;
+    this.router.navigate(['/auth']);
+    localStorage.removeItem('userData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+  autoLogout(expDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expDuration);
   }
   private handleAuth(
     email: string,
     userId: string,
     token: string,
     expiresIn: number
-    ) {
-    const expDate = new Date (
-      new Date().getTime()
-        +expiresIn * 1000);
-    }
-    private handleError (errorRes: HttpErrorResponse) {
-      let errorMsg = 'An unknown error occured!';
-        if (!errorRes.error || !errorRes.error.error) {
-          return throwError(() => new Error(errorMsg));
-        }
-        switch (errorRes.error.error.message) {
-          case 'INVAILED_EMAIL_OR_PASSWORD!':
-            errorMsg = 'This email or password is not correct!';
-        }
-        return throwError(() => new Error (errorMsg));
-        }
-}
+  ) {
+    const expDate = new Date(new Date().getTime() + expiresIn * 1000);
 
+    const newUser = new User(email, userId, token, expDate);
+    this.currUser.next(newUser);
+
+    this.autoLogout(expiresIn * 1000);
+
+    localStorage.setItem('userData', JSON.stringify(newUser));
+  }
+}

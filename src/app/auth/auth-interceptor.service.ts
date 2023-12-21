@@ -17,17 +17,16 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return this.authService.currUser.pipe(
+    const modifiedReq = this.authService.currUser.pipe(
       take(1),
-      exhaustMap((User) => {
-        if (!User) {
-          return next.handle(req);
-        }
-        const modifiedReq = req.clone({
-          params: new HttpParams().set('auth', User.token!),
+      exhaustMap((user) => {
+        if (!user) return next.handle(req);
+        const modifiedReq = req.clone ({
+          params: new HttpParams().set('auth', 'user.token'),
         });
         return next.handle(modifiedReq);
       })
     );
+    return modifiedReq;
   }
 }

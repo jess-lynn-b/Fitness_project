@@ -1,0 +1,20 @@
+<body>
+  <div class="container">
+  <h2>Activity Tracker</h2>
+  <ul>
+  <li><label for="exerciseName">Exercise Name:</label>
+  <input id="exerciseName" [(ngModel)]="exercise.name" /></li>
+
+  <li><label for="exerciseNotes">Notes:</label>
+  <textarea id="exerciseNotes" [(ngModel)]="exercise.notes"></textarea></li>
+
+  <li><label for="caloriesBurned">Calories Burned:</label>
+  <input
+    type="number"
+    id="caloriesBurned"
+    [(ngModel)]="exercise.caloriesBurned"/></li>
+
+  <li><button (click)="addActivity()">Add Activity</button></li>
+</ul>
+</div>
+</body>

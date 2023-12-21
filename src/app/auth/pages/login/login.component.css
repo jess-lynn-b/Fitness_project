@@ -1,0 +1,27 @@
+.background{
+  background-color: #006466;
+  background-size: auto;
+  padding: 8em;
+}
+button{
+  color: whitesmoke;
+  background: transparent;
+  border: 3px solid #272640;
+  cursor: pointer;
+  box-shadow: 3px 5px whitesmoke;
+}
+button:hover {
+  background: #1B3A4B;
+  color: whitesmoke;
+  text-shadow: 1px 1px #4D194d;
+  border: 2px solid #272640;
+  cursor: pointer;
+}
+h1{
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
+}
+label{
+  color: whitesmoke;
+  text-shadow: 1px 1px black;
+}

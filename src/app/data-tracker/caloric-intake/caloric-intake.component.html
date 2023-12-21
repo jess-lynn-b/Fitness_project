@@ -1,0 +1,43 @@
+<body>
+
+  <div class="container">
+  <h2>Recommended Daily Caloric Intake</h2>
+  <div>
+    <label for="weight">Weight (kg/lb):</label>
+    <input type="number" id="weight" [(ngModel)]="weight">
+  </div>
+  <div>
+    <label for="height">Height (cm/in):</label>
+    <input type="number" id="height" [(ngModel)]="height">
+  </div>
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" [(ngModel)]="age">
+  </div>
+  <div>
+    <label for="gender">Gender:</label>
+    <select id="gender" [(ngModel)]="isMale">
+      <option value="true">Male</option>
+      <option value="false">Female</option>
+    </select>
+  </div>
+  <div>
+    <label for="activityLevel">Activity Level:</label>
+    <select id="activityLevel" [(ngModel)]="activityFactor">
+      <option value="1.2">Sedentary</option>
+      <option value="1.375">Lightly Active</option>
+      <option value="1.55">Moderately Active</option>
+      <option value="1.725">Very Active</option>
+      <option value="1.9">Extremely Active</option>
+    </select>
+  </div>
+  <div>
+    <button (click)="calculateCaloricIntake()">Calculate</button>
+  </div>
+  <div *ngIf="bmr && tdee">
+    <p>BMR: {{ bmr.toFixed(2) }} kcal/day</p>
+    <p>TDEE: {{ tdee.toFixed(2) }} kcal/day</p>
+  </div>
+
+</div>
+</body>
