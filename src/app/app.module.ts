@@ -10,7 +10,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FirestoreModule } from '@angular/fire/firestore';
 
-
 @NgModule({
   declarations: [
     AppComponent,
