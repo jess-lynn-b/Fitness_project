@@ -46,9 +46,7 @@ export class ProfileComponent implements OnInit {
     this.apiAction = '';
   }
   ngOnInit() {
-    this.userService.get().subscribe((data: ProfileUserModel) => {
-      this.user = data;
-    });
+    
 
   }
   currWeight(){
@@ -60,7 +58,7 @@ export class ProfileComponent implements OnInit {
     this.info.currWeight;
     console.log(this.currWeight);
   }
-  logout(): void {
+  logout() {
     this.authService.logout();
   }
 }

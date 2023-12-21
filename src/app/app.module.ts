@@ -7,8 +7,8 @@ import { CaloricIntakeComponent } from './data-tracker/caloric-intake/caloric-in
 import { firebaseConfig } from './enviroments/enviroment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat'
-
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { FirestoreModule } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -22,6 +22,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat'
     SharedModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    FirestoreModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

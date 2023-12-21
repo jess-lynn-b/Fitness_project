@@ -24,7 +24,8 @@ export class UserService {
     if (storedMe && !forceRefresh){
       return of(JSON.parse(storedMe));
     }
-    return this.http.get('user/me', {}, expectUnanth).pipe(
+    return this.http.get('', {})
+    .pipe(
       tap((me: any) => {
         localStorage.setItem(LocalStorageConfig.ME, JSON.stringify(me));
       })

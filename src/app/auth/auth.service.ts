@@ -14,11 +14,13 @@ export interface AuthReqData {
   email: string;
   password: string;
   returnSecureToken?: boolean;
+  name: string;
 }
 export interface AuthResData {
   kind: string;
   idToken: string;
   email: string;
+  name: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
@@ -27,13 +29,13 @@ export interface AuthResData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  currUser = new BehaviorSubject<User>(null!);
+  currUser = new BehaviorSubject<User | null>(null!);
   private tokenExpirationTimer: any;
 
   constructor(private router: Router, private http: HttpClient, private afAuth: AngularFireAuth) {}
 
   signUpWithEmailPassword(authData: AuthReqData) {
-    if (!authData.email || !authData.password) return;
+    if (!authData.email || !authData.password || !authData.name ) return;
     const authRes = this.http
       .post<AuthResData>(FIREBASE_SIGNUP_URL, {
         ...authData,
@@ -48,27 +50,24 @@ export class AuthService {
       );
     return authRes;
   }
-  loginWithEmailPassword(authData: AuthReqData) {
-    if (!authData.email || !authData.password) return;
+  LoginWithEmailPassword(authData: AuthReqData) {
+    if (!authData.email || !authData.password ) return;
     let headers = new HttpHeaders()
       .set('Access-Control-Allow-Origin', '*');
 
-    // const authRes = this.http
-    //   .post<AuthResData>(FIREBASE_LOGIN_URL, {
-    //     ...authData,
-    //     returnSecureToken: true,
-    //   }, {headers})
-    //   .pipe(
-    //     tap((res) => {
-    //       const { email, localId, idToken, expiresIn } = res;
-    //       this.handleAuth(email, localId, idToken, +expiresIn);
-    //     })
-    //   );
-
-    this.afAuth.signInWithEmailAndPassword(authData.email, authData.password).then(response => console.log(response))
-    return of(null);
+    const authRes = this.http
+      .post<AuthResData>(FIREBASE_LOGIN_URL, {
+        ...authData,
+        returnSecureToken: true,
+      }, {headers})
+      .pipe(
+        tap((res) => {
+          const { email, localId, idToken, expiresIn } = res;
+          this.handleAuth(email, localId, idToken, +expiresIn);
+        })
+      );
   }
-  signOut() {
+  logOut() {
     this.currUser.next(null!);
     this.router.navigate(['profile']);
   }
@@ -92,7 +91,12 @@ export class AuthService {
 
     if (newUser.token) {
       this.currUser.next(newUser);
+
+      const expDuration = 
+        new Date(lsUser._tokenExpDate).getTime() - new Date().getTime();
+      this.autoLogout(expDuration);
     }
+
   }
   logout() {
     this.currUser.next;
@@ -120,5 +124,7 @@ export class AuthService {
     this.currUser.next(newUser);
 
     this.autoLogout(expiresIn * 1000);
+
+    localStorage.setItem('userData', JSON.stringify(newUser));
   }
 }
