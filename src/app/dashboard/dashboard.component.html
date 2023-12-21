@@ -80,9 +80,10 @@
     <body>
 
           <div>
-
-            <circle-progress [percent]="calculateProgress()" [subtitle]="'Calories'" [space]="-10" [radius]="200" [outerStrokeWidth]="10" [innerStrokeWidth]="10" outerStrokeColor="#f37c7c" innerStrokeColor="#e7e8ea" [animation]="true" [animationDuration]="1000">Kcal</circle-progress>
-
+            <circle-progress
+              [percent]="calculateProgress()" [subtitle]="'Calories Consumed'" [space]="-10" [radius]="200" [outerStrokeWidth]="10" [innerStrokeWidth]="10" outerStrokeColor="paleturquoise" innerStrokeColor="#065A60" [animation]="true" [animationDuration]="1000"
+              [title]="amountCaloriesConsumed()">
+            </circle-progress>
           </div>
 
     </body>

@@ -41,24 +41,19 @@ export class FoodLogComponent implements OnInit {
     return this.foodLogs.filter(food => food.category === category)
   }
 
-  totalCaloriesLogged() {
-    let totalCalories = 0;
-
-    for (let i = 0; i < this.foodLogs.length; i++) {
-      totalCalories += this.foodLogs[i].calories;
-    }
-    return totalCalories;
+  totalFoodCalories() {
+    return this.foodService.totalCaloriesLogged();
   }
 
-  onEditFood(foodId: number) {
-    this.foodService.startedEditing.next(foodId);
+  // onEditFood(foodId: number) {
+  //   this.foodService.startedEditing.next(foodId);
 
-    const foodIndex = foodId + 1;
-    // this.selectedFood = this.foodLogs.find((food) => food.id === foodId);
-    this.showUpdateModal = true;
+  //   const foodIndex = foodId + 1;
+  //   // this.selectedFood = this.foodLogs.find((food) => food.id === foodId);
+  //   this.showUpdateModal = true;
 
-    console.log(foodId);
-    this.router.navigate(['food-log','edit-log', foodIndex]);
-  }
+  //   console.log(foodId);
+  //   this.router.navigate(['food-log','edit-log', foodIndex]);
+  // }
 
 }
