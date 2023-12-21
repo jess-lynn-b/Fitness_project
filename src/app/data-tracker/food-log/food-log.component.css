@@ -3,13 +3,21 @@
   color: #212f45;
 }
 
+.page {
+  background-color: #006466;
+  height: 100vh;
+}
+
 p {
   font-weight: 700;
 }
 
 * {
   color: #312244;
-  background-color: #006466;
+}
+
+ul {
+  margin-top: 50px;
 }
 
 li {
