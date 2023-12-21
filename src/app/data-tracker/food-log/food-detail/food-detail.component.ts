@@ -95,12 +95,13 @@ export class FoodDetailComponent implements OnInit {
           value.notes
         );
       }
-
-      if (this.editMode) {
-        this.foodService.editFood(this.editedFoodIndex, newFood);
-      } else {
-        this.foodService.addFood(newFood);
-      }
+      //uncomment when ready to work on it, was giving errors while not in use
+      
+      // if (this.editMode) {
+      //   this.foodService.editFood(this.editedFoodIndex, newFood);
+      // } else {
+      //   this.foodService.addFood(newFood);
+      // }
 
       this.editMode = false;
       this.foodForm.reset();
