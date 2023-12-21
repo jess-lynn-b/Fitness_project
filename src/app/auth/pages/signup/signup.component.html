@@ -5,6 +5,25 @@
   <div class="justify-content-center align-items-center">
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
       <div class="form-group">
+        <label >
+          Name:
+          <input
+            [class.is-invalid] = "name.invalid && (name.touched || hasSubmitted)"
+            id="name"
+            name="name"
+            formControlName="name"
+            type="text"
+            class="form-control"
+            autocomplete="name"
+            required
+            placeholder="Please enter your name:">
+        </label>
+
+        <div *ngIf="name.invalid && (name.touched || hasSubmitted)">
+          <small *ngIf="name.errors?.['required']" class="text-danger"
+            >Email is required!</small>
+        </div>
+        <div class="form-group">
         <label>
           Email:
           <input
@@ -22,10 +41,10 @@
         /></label>
 
         <div *ngIf="email.invalid && (email.touched || hasSubmitted)">
-          <small *ngIf="email.errors?.required" class="text-danger"
+          <small *ngIf="email.errors?.['required']" class="text-danger"
             >Email is required!</small
           >
-          <small *ngIf="email.errors?.pattern" class="text-danger">
+          <small *ngIf="email.errors?.['pattern']" class="text-danger">
             Make sure Email is correct</small
           >
         </div>
@@ -48,11 +67,11 @@
             required
         /></label>
 
-        <div *ngIf="password.invailid && (password.touched || hasSubmitted)">
-          <label *ngIf="password.errors?.required" class="text-danger"
+        <div *ngIf="password.invalid && (password.touched || hasSubmitted)">
+          <label *ngIf="password.errors?.['required']" class="text-danger"
             >Password is required</label
           >
-          <label *ngIf="password.errors?.minlength" class="text-danger"
+          <label *ngIf="password.errors?.['minlength']" class="text-danger"
             >Password should be minimum of 6 characters</label
           >
         </div>
@@ -89,7 +108,4 @@
         </div>
         <br>
       </div>
-    </form>
   </div>
-</div>
-</div>

@@ -18,7 +18,6 @@ export class ActivityTrackerComponent {
 
   addActivity() {
     this.activityService.addActivity(this.exercise);
-    this.httpService.saveActivityToFirebase();
     this.exercise = { name: '', notes: '', caloriesBurned: 0 };
   }
 }
